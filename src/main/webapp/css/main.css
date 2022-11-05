@@ -1,0 +1,68 @@
+body {
+  background: rgb(255,218,0);
+  background: radial-gradient(circle, rgba(255,218,0,1) 0%, rgba(255,111,0,1) 100%);
+  min-height: 100vh;
+  margin:0;
+  display:flex; 
+  flex-direction:column;
+}
+main { 
+  flex: 1; 
+}
+footer { 
+  border-top: 1px solid rgba(122,122,122,0.3);
+  padding-top: 1vh; 
+  padding-bottom: 1.5vh; 
+}
+.navbar-nav {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.navbar-nav > li {
+  margin-top: auto;
+  margin-bottom: auto;
+  background: rgb(255,64,0);
+  border-radius: 4px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  min-width: 20vh;
+  padding: 1vh;
+}
+.navbar-nav > li:has(button, a):hover {
+  background: rgb(255,90,0);
+}
+.navbar-toggler {
+  margin:5vh;
+}
+button {
+  border-radius: 4px!important;
+}
+.entity {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgba(255,255,255,0.2);
+  border-radius: 4px;
+  padding: 0.5vw;
+  margin:1vw;
+  cursor: pointer;
+  color: black;
+  text-decoration: none; /* no underline */
+}
+.entity:hover {
+  background-color: rgba(255,255,255,0.4);
+  color: black;
+}
+.entity img {
+  width: 15vw;
+  height: 15vw;
+}
+.entity-selected {
+  background-color: rgba(255,255,255,0.6);
+}
+a {
+  text-decoration: none;
+  color: #2c7715;
+}
+a:hover {
+  color: #2c7715;
+}

@@ -1,4 +1,4 @@
-package com.kerrrusha.playlistassistant.models;
+package com.kerrrusha.playlistassistant.model;
 
 public class User {
 
