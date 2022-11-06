@@ -14,7 +14,7 @@ public class UserDao extends AbstractDao {
 		Collection<User> entities = new ArrayList<>();
 		try (Connection con = DriverManager.getConnection(FULL_URL);
 		     Statement stmt = con.createStatement();
-		     ResultSet rs = stmt.executeQuery(Queries.SELECT_ALL_USERS);) {
+		     ResultSet rs = stmt.executeQuery(Queries.SELECT_ALL_USERS)) {
 			while(rs.next()) {
 				entities.add(mapToUser(rs));
 			}
