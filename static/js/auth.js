@@ -1,4 +1,7 @@
-function processLogin(url) {
+$("#login").click(processLogin);
+$("#register").click(processRegister);
+
+function processLogin() {
 	hideErrorsBlock();
 
 	let login = $(".login-show input[placeholder=Nickname]").val();
@@ -17,16 +20,19 @@ function processLogin(url) {
 		return;
 	}
 
-	let data = "login="+login+"&password="+password;
+	let url = "/auth";
+	let data = JSON.stringify({ login: login, password: password });
 	$.ajax({
 	  type: "POST",
 	  url: url,
+   	  dataType: "json",
+   	  contentType: "application/json; charset=utf-8",
 	  data: data,
 	  success: function(response) {
-		  console.log(response);
+	        alert("ajax success:\n" + response);
 	  },
 	  error: function (response) {
-	      console.log(response);
+	    	alert("ajax error:\n" + response);
 	  }
 	});
 }
@@ -59,7 +65,7 @@ function validatePassword(password) {
 	return password.length >= 3 && !password.includes(" ");
 }
 
-function processRegister(url) {
+function processRegister() {
 	hideErrorsBlock();
 
 	let login = $(".register-show input[placeholder=Nickname]").val();
@@ -81,19 +87,6 @@ function processRegister(url) {
 		showErrors(errors);
 		return;
 	}
-
-	let data = "login="+login+"&password="+password+"&passwordRepeat="+passwordRepeat;
-	$.ajax({
-		type: "POST",
-		url: url,
-		data: data,
-		success: function(response) {
-			console.log(response);
-		},
-		error: function (response) {
-			console.log(response);
-		}
-	});
 }
 
 

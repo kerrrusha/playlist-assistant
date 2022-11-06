@@ -2,7 +2,8 @@ package com.kerrrusha.playlistassistant.dao.user_selected_artist;
 
 import com.kerrrusha.playlistassistant.dao.AbstractDao;
 import com.kerrrusha.playlistassistant.dao.DBException;
-import com.kerrrusha.playlistassistant.model.User;
+import com.kerrrusha.playlistassistant.dao.user_selected_artist.constant.Fields;
+import com.kerrrusha.playlistassistant.dao.user_selected_artist.constant.Queries;
 import com.kerrrusha.playlistassistant.model.UserSelectedArtist;
 
 import java.sql.*;
@@ -10,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class UserSelectedArtistDao extends AbstractDao {
+
+	public UserSelectedArtistDao() throws DBException {}
 
 	public Collection<UserSelectedArtist> findAll() throws DBException {
 		Collection<UserSelectedArtist> entities = new ArrayList<>();
@@ -48,18 +51,18 @@ public class UserSelectedArtistDao extends AbstractDao {
 		     PreparedStatement stmt = con.prepareStatement(Queries.INSERT_USER_SELECTED_ARTIST)) {
 			stmt.setInt(1, entity.getUserId());
 			stmt.setString(2, entity.getArtistName());
-			stmt.executeQuery();
+			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DBException(e.getMessage());
 		}
 	}
 
-	public void delete(UserSelectedArtist entity) throws DBException {
+	public void deleteById(UserSelectedArtist entity) throws DBException {
 		try (Connection con = DriverManager.getConnection(FULL_URL);
-		     PreparedStatement stmt = con.prepareStatement(Queries.DELETE_USER_SELECTED_ARTIST)) {
+		     PreparedStatement stmt = con.prepareStatement(Queries.DELETE_USER_SELECTED_ARTIST_BY_ID)) {
 			stmt.setInt(1, entity.getId());
-			stmt.executeQuery();
+			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DBException(e.getMessage());

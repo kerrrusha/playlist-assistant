@@ -28,20 +28,23 @@
         <li class="nav-item active h1">
           <a class="nav-link" href="#">Playlist Assistant</a>
         </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="#">My music</a>
+        </li> -->
       </ul>
     </div>
   </nav>
 </header>
 
 <main>
-  <h1 class="bg-danger">registered - ${cookie.containsKey("uid")}</h1>
   <p class="display-5 fs-3 text-decoration-underline">The place to get new music based on what you love</p>
+
   <div class="login-reg-panel">
     <div class="login-info-box">
       <h2>Already have an account?</h2>
       <p></p>
       <label id="label-register" for="log-reg-show">Login</label>
-      <input type="radio" name="active-log-panel" id="log-reg-show" checked="checked">
+      <input type="radio" name="active-log-panel" id="log-reg-show"  checked="checked">
     </div>
 
     <div class="register-info-box">
@@ -54,17 +57,20 @@
     <div class="white-panel">
       <div class="login-show">
         <h2>LOGIN</h2>
-        <input type="text" placeholder="Email">
+        <input type="text" placeholder="Nickname">
         <input type="password" placeholder="Password">
-        <input type="button" value="Login">
+        <input onclick="processLogin('${pageContext.request.contextPath}/auth/login')" id="login" type="button" value="Login">
         <a href="">Forgot password?</a>
       </div>
       <div class="register-show">
         <h2>REGISTER</h2>
-        <input type="text" placeholder="Email">
+        <input type="text" placeholder="Nickname">
         <input type="password" placeholder="Password">
         <input type="password" placeholder="Confirm Password">
-        <input type="button" value="Register">
+        <input onclick="processRegister('${pageContext.request.contextPath}/auth/register')" id="register" type="button" value="Register">
+      </div>
+      <div class="errors-block" style="visibility: hidden;">
+
       </div>
     </div>
   </div>
@@ -83,7 +89,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
-<%-- auth script --%>
-<script src="${pageContext.request.contextPath}/js/auth.js" type="text/javascript"></script>
+<!-- auth logic -->
+<script src="${pageContext.request.contextPath}/js/auth.js"></script>
 </body>
 </html>

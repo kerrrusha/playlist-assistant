@@ -12,6 +12,10 @@ public class Artist {
 		this.artistName = artistName;
 	}
 
+	public boolean isEmpty() {
+		return artistName.isEmpty();
+	}
+
 	@Override
 	public String toString() {
 		return "Artist{" +

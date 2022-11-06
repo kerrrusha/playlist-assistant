@@ -1,4 +1,4 @@
-package com.kerrrusha.playlistassistant.dao.user_selected_artist;
+package com.kerrrusha.playlistassistant.dao.user_selected_artist.constant;
 
 public class Fields {
 

@@ -2,6 +2,8 @@ package com.kerrrusha.playlistassistant.dao.user;
 
 import com.kerrrusha.playlistassistant.dao.AbstractDao;
 import com.kerrrusha.playlistassistant.dao.DBException;
+import com.kerrrusha.playlistassistant.dao.user.constant.Fields;
+import com.kerrrusha.playlistassistant.dao.user.constant.Queries;
 import com.kerrrusha.playlistassistant.model.User;
 
 import java.sql.*;
@@ -9,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class UserDao extends AbstractDao {
+
+	public UserDao() throws DBException {}
 
 	public Collection<User> findAll() throws DBException {
 		Collection<User> entities = new ArrayList<>();
@@ -64,18 +68,29 @@ public class UserDao extends AbstractDao {
 		     PreparedStatement stmt = con.prepareStatement(Queries.INSERT_USER)) {
 			stmt.setString(1, entity.getLogin());
 			stmt.setString(2, entity.getPassword());
-			stmt.executeQuery();
+			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DBException(e.getMessage());
 		}
 	}
 
-	public void delete(User entity) throws DBException {
+	public void deleteById(User entity) throws DBException {
 		try (Connection con = DriverManager.getConnection(FULL_URL);
-		     PreparedStatement stmt = con.prepareStatement(Queries.DELETE_USER)) {
+		     PreparedStatement stmt = con.prepareStatement(Queries.DELETE_USER_BY_ID)) {
 			stmt.setInt(1, entity.getId());
-			stmt.executeQuery();
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DBException(e.getMessage());
+		}
+	}
+
+	public void deleteByLogin(User entity) throws DBException {
+		try (Connection con = DriverManager.getConnection(FULL_URL);
+		     PreparedStatement stmt = con.prepareStatement(Queries.DELETE_USER_BY_LOGIN)) {
+			stmt.setString(1, entity.getLogin());
+			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DBException(e.getMessage());

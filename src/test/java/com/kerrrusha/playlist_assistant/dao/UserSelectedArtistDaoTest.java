@@ -8,9 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 public class UserSelectedArtistDaoTest {
 
 	@Test
-	public void isConnectedAndGetsUserTableTest() {
-		UserSelectedArtistDao dao = new UserSelectedArtistDao();
-
-		assertDoesNotThrow(dao::findAll);
+	public void isConnectedTest() {
+		assertDoesNotThrow(UserSelectedArtistDao::new);
 	}
 }

@@ -12,6 +12,10 @@ public class Track extends Artist {
 		this.trackName = trackName;
 	}
 
+	public boolean isEmpty() {
+		return trackName.isEmpty();
+	}
+
 	@Override
 	public String toString() {
 		return "Track{" +
