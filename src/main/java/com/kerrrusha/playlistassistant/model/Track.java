@@ -1,17 +1,8 @@
 package com.kerrrusha.playlistassistant.model;
 
-public class Track {
+public class Track extends Artist {
 
-	private String trackName;
-	private String artistName;
-
-	public String getArtistName() {
-		return artistName;
-	}
-
-	public void setArtistName(String artistName) {
-		this.artistName = artistName;
-	}
+	protected String trackName;
 
 	public String getTrackName() {
 		return trackName;
