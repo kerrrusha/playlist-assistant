@@ -1,7 +1,6 @@
 package com.kerrrusha.playlistassistant.controller.auth;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.kerrrusha.playlistassistant.service.auth.RegisterService;
 import com.kerrrusha.playlistassistant.service.auth.result.AuthResult;
 
