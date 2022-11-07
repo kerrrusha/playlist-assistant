@@ -7,6 +7,8 @@ import org.apache.http.HttpStatus;
 
 import java.util.Collection;
 
+import static com.kerrrusha.playlistassistant.util.DaoUtil.getUserId;
+
 public class LoginService {
 
 	private static final int OK_STATUS = HttpStatus.SC_OK;
@@ -20,7 +22,7 @@ public class LoginService {
 		this.password = password;
 	}
 
-	public AuthResult doLogin() {
+	public AuthResult processLogin() {
 		AuthResult result = new AuthResult();
 		AbstractValidator validator = new LoginValidator(login, password);
 
@@ -32,6 +34,7 @@ public class LoginService {
 		}
 
 		result.setStatus(OK_STATUS);
+		result.setUserId(getUserId(login));
 		return result;
 	}
 }

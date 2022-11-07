@@ -1,6 +1,7 @@
 package com.kerrrusha.playlistassistant.controller.auth;
 
 import com.google.gson.Gson;
+import com.kerrrusha.playlistassistant.service.auth.AuthService;
 import com.kerrrusha.playlistassistant.service.auth.LoginService;
 import com.kerrrusha.playlistassistant.service.auth.result.AuthResult;
 
@@ -18,8 +19,13 @@ public class LoginServlet extends HttpServlet {
 		final String login = request.getParameter("login");
 		final String password = request.getParameter("password");
 
-		AuthResult result = new LoginService(login, password).doLogin();
+		AuthResult result = new LoginService(login, password).processLogin();
+		new AuthService(request).authenticate(result.getUserId());
 
 		setJsonToResponse(response, gson.toJson(result));
+
+		if (result.isOK()) {
+			response.sendRedirect("index.jsp");
+		}
 	}
 }

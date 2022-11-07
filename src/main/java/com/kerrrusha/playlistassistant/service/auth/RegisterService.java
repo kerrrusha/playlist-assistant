@@ -10,6 +10,8 @@ import org.apache.http.HttpStatus;
 
 import java.util.Collection;
 
+import static com.kerrrusha.playlistassistant.util.DaoUtil.getUserId;
+
 public class RegisterService {
 
 	private static final String DATABASE_ERROR = "An error occurred on the server while creating a new user. We will definitely fix this, but for now, please try again.";
@@ -26,7 +28,7 @@ public class RegisterService {
 		this.passwordRepeat = passwordRepeat;
 	}
 
-	public AuthResult doRegister() {
+	public AuthResult processRegister() {
 		AuthResult result = new AuthResult();
 		AbstractValidator validator = new RegisterValidator(login, password, passwordRepeat);
 
@@ -46,6 +48,7 @@ public class RegisterService {
 			return result;
 		}
 
+		result.setUserId(getUserId(login));
 		result.setStatus(OK_STATUS);
 		return result;
 	}

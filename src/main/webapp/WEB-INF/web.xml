@@ -16,6 +16,10 @@
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>com.kerrrusha.playlistassistant.controller.auth.RegisterServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SignoutServlet</servlet-name>
+        <servlet-class>com.kerrrusha.playlistassistant.controller.auth.SignoutServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>IndexServlet</servlet-name>
@@ -28,5 +32,9 @@
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/auth/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SignoutServlet</servlet-name>
+        <url-pattern>/auth/signout</url-pattern>
     </servlet-mapping>
 </web-app>
