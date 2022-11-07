@@ -3,17 +3,23 @@ package com.kerrrusha.playlistassistant.validator.auth;
 import com.kerrrusha.playlistassistant.dao.DBException;
 import com.kerrrusha.playlistassistant.dao.user.UserDao;
 import com.kerrrusha.playlistassistant.model.User;
-import com.kerrrusha.playlistassistant.validator.Validator;
+import com.kerrrusha.playlistassistant.validator.AbstractValidator;
 
+import java.util.Collection;
 import java.util.Optional;
 
-public class RegisterValidator extends Validator {
+import static com.kerrrusha.playlistassistant.util.ValidatorUtil.checkIfFieldIsNull;
+
+public class RegisterValidator extends AbstractValidator {
 
 	private static final String INCORRECT_LOGIN = "Login must be at least 3 characters long and must not contain spaces.";
 	private static final String INCORRECT_PASSWORD = "Password must be at least 3 characters long and must not contain spaces.";
 	private static final String DATABASE_ERROR = "Something is wrong with the server. We will definitely fix this, but for now, please try again.";
 	private static final String LOGIN_ALREADY_EXISTS = "Such login already exists.";
 	private static final String PASSWORDS_DO_NOT_MATCHES = "Passwords don't match.";
+	private static final String LOGIN_IS_NULL = "Something is wrong while submitting login to the server. We will definitely fix this, but for now, please try again.";
+	private static final String PASSWORD_IS_NULL = "Something is wrong while submitting password to the server. We will definitely fix this, but for now, please try again.";
+	private static final String PASSWORD_REPEAT_IS_NULL = "Something is wrong while submitting password-repeat to the server. We will definitely fix this, but for now, please try again.";
 
 	private final String login;
 	private final String password;
@@ -27,9 +33,19 @@ public class RegisterValidator extends Validator {
 
 	@Override
 	protected void validate() {
+		addPossibleError(checkIfFieldIsNull(login, LOGIN_IS_NULL));
+		addPossibleError(checkIfFieldIsNull(password, PASSWORD_IS_NULL));
+		addPossibleError(checkIfFieldIsNull(passwordRepeat, PASSWORD_REPEAT_IS_NULL));
 		addPossibleError(validateLogin());
 		addPossibleError(validatePasswords());
 		addPossibleError(validateIfExists());
+	}
+
+	@Override
+	public Collection<String> getErrors() {
+		clearPossibleErrors();
+		validate();
+		return getErrorPool();
 	}
 
 	private Optional<String> validateLogin() {
@@ -52,6 +68,6 @@ public class RegisterValidator extends Validator {
 			return Optional.of(DATABASE_ERROR);
 		}
 
-		return user.isEmpty() ? Optional.empty() : Optional.of(LOGIN_ALREADY_EXISTS);
+		return user == null ? Optional.empty() : Optional.of(LOGIN_ALREADY_EXISTS);
 	}
 }

@@ -1,7 +1,7 @@
 package com.kerrrusha.playlistassistant.service.auth;
 
 import com.kerrrusha.playlistassistant.service.auth.result.AuthResult;
-import com.kerrrusha.playlistassistant.validator.Validator;
+import com.kerrrusha.playlistassistant.validator.AbstractValidator;
 import com.kerrrusha.playlistassistant.validator.auth.LoginValidator;
 import org.apache.http.HttpStatus;
 
@@ -22,7 +22,7 @@ public class LoginService {
 
 	public AuthResult doLogin() {
 		AuthResult result = new AuthResult();
-		Validator validator = new LoginValidator(login, password);
+		AbstractValidator validator = new LoginValidator(login, password);
 
 		Collection<String> errorPool = validator.getErrors();
 		if (!errorPool.isEmpty()) {

@@ -3,34 +3,33 @@ package com.kerrrusha.playlistassistant.validator;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
-import java.util.TreeSet;
 
 import static java.util.stream.Collectors.toCollection;
 
-public abstract class Validator {
+public abstract class AbstractValidator {
 
 	private final Collection<Optional<String>> possibleErrors;
 
-	public Validator() {
+	public AbstractValidator() {
 		possibleErrors = new HashSet<>();
 	}
 
 	protected abstract void validate();
 
-	public final Collection<String> getErrors() {
-		clearPossibleErrors();
-		validate();
+	public abstract Collection<String> getErrors();
+
+	protected final Collection<String> getErrorPool() {
 		return possibleErrors.stream()
 				.filter(Optional::isPresent)
 				.map(Optional::get)
-				.collect(toCollection(TreeSet<String>::new));
+				.collect(toCollection(HashSet<String>::new));
 	}
 
-	public final void clearPossibleErrors() {
+	protected final void clearPossibleErrors() {
 		possibleErrors.clear();
 	}
 
-	public final void addPossibleError(Optional<String> error) {
+	protected final void addPossibleError(Optional<String> error) {
 		possibleErrors.add(error);
 	}
 }

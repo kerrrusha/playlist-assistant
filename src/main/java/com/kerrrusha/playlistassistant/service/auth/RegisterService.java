@@ -4,7 +4,7 @@ import com.kerrrusha.playlistassistant.dao.DBException;
 import com.kerrrusha.playlistassistant.dao.user.UserDao;
 import com.kerrrusha.playlistassistant.model.User;
 import com.kerrrusha.playlistassistant.service.auth.result.AuthResult;
-import com.kerrrusha.playlistassistant.validator.Validator;
+import com.kerrrusha.playlistassistant.validator.AbstractValidator;
 import com.kerrrusha.playlistassistant.validator.auth.RegisterValidator;
 import org.apache.http.HttpStatus;
 
@@ -28,7 +28,7 @@ public class RegisterService {
 
 	public AuthResult doRegister() {
 		AuthResult result = new AuthResult();
-		Validator validator = new RegisterValidator(login, password, passwordRepeat);
+		AbstractValidator validator = new RegisterValidator(login, password, passwordRepeat);
 
 		Collection<String> errorPool = validator.getErrors();
 		if (!errorPool.isEmpty()) {
