@@ -3,8 +3,8 @@ function processLogin(url) {
 
 	let login = $(".login-show input[placeholder=Nickname]").val();
 	let password = $(".login-show input[placeholder=Password]").val();
-	
-	errors = [];
+
+	let errors = [];
 	if (!validateLogin(login)) {
 		errors.push("Login must be at least 3 characters long and must not contain spaces.");
 	}
@@ -12,7 +12,7 @@ function processLogin(url) {
 		errors.push("Password must be at least 3 characters long and must not contain spaces.");
 	}
 
-	if (errors.length != 0) {
+	if (errors.length !== 0) {
 		showErrors(errors);
 		return;
 	}
@@ -65,8 +65,8 @@ function processRegister(url) {
 	let login = $(".register-show input[placeholder=Nickname]").val();
 	let password = $(".register-show input[placeholder=Password]").val();
 	let passwordRepeat = $(".register-show input[placeholder*=Confirm]").val();
-	
-	errors = [];
+
+	let errors = [];
 	if (!validateLogin(login)) {
 		errors.push("Login must be at least 3 characters long and must not contain spaces.");
 	}
@@ -77,7 +77,7 @@ function processRegister(url) {
 		errors.push("Passwords don't match.");
 	}
 
-	if (errors.length != 0) {
+	if (errors.length !== 0) {
 		showErrors(errors);
 		return;
 	}

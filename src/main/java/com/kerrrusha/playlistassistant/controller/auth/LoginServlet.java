@@ -6,7 +6,8 @@ import com.kerrrusha.playlistassistant.service.auth.result.AuthResult;
 
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.io.PrintWriter;
+
+import static com.kerrrusha.playlistassistant.util.ServletUtil.setJsonToResponse;
 
 public class LoginServlet extends HttpServlet {
 
@@ -19,15 +20,6 @@ public class LoginServlet extends HttpServlet {
 
 		AuthResult result = new LoginService(login, password).doLogin();
 
-		String jsonResult = gson.toJson(result);
-		setJsonToResponse(response, jsonResult);
-	}
-
-	private void setJsonToResponse(HttpServletResponse response, String jsonString) throws IOException {
-		PrintWriter out = response.getWriter();
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		out.print(jsonString);
-		out.flush();
+		setJsonToResponse(response, gson.toJson(result));
 	}
 }
