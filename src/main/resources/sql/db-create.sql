@@ -5,14 +5,14 @@ create table if not exists "user"(
     id serial PRIMARY KEY not null,
     login varchar(100) unique not null,
     password varchar(100) not null,
-    created TIMESTAMP
+    created TIMESTAMP default current_timestamp
 );
 
 create table if not exists user_selected_artist(
     id serial not null,
     user_id int not null,
     artist_name varchar(100) not null,
-    created TIMESTAMP,
+    created TIMESTAMP default current_timestamp,
     FOREIGN KEY (user_id) REFERENCES "user" (id)
 );
 
