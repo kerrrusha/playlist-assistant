@@ -1,4 +1,4 @@
-package com.kerrrusha.playlistassistant.models;
+package com.kerrrusha.playlistassistant.model;
 
 public class User {
 
@@ -30,5 +30,18 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isEmpty() {
+        return login.isEmpty() && password.isEmpty();
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
