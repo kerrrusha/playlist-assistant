@@ -20,6 +20,10 @@
         <servlet-name>SignoutServlet</servlet-name>
         <servlet-class>com.kerrrusha.playlistassistant.controller.auth.SignoutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SetFavouriteArtistsServlet</servlet-name>
+        <servlet-class>com.kerrrusha.playlistassistant.controller.SetFavouriteArtistsServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>IndexServlet</servlet-name>
@@ -37,4 +41,21 @@
         <servlet-name>SignoutServlet</servlet-name>
         <url-pattern>/auth/signout</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SetFavouriteArtistsServlet</servlet-name>
+        <url-pattern>/set-favourite-artists</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <description>
+            Redirect all not authorized requests to index.jsp
+        </description>
+        <filter-name>IsAuthorizedFilter</filter-name>
+        <filter-class>com.kerrrusha.playlistassistant.filter.IsAuthorizedFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>IsAuthorizedFilter</filter-name>
+        <url-pattern>/set-favourite-artists</url-pattern>
+    </filter-mapping>
 </web-app>

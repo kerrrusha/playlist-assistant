@@ -24,6 +24,11 @@ function processLogin(url) {
 	  data: data,
 	  success: function(response) {
 		  console.log(response);
+		  if (response["status"] === 200) {
+			  location.reload();
+		  } else {
+			  showErrors(response["errorPool"]);
+		  }
 	  },
 	  error: function (response) {
 	      console.log(response);
@@ -59,7 +64,7 @@ function validatePassword(password) {
 	return password.length >= 3 && !password.includes(" ");
 }
 
-function processRegister(url) {
+function processRegister(registerUrl, afterRegisterUrl) {
 	hideErrorsBlock();
 
 	let login = $(".register-show input[placeholder=Nickname]").val();
@@ -85,10 +90,15 @@ function processRegister(url) {
 	let data = "login="+login+"&password="+password+"&passwordRepeat="+passwordRepeat;
 	$.ajax({
 		type: "POST",
-		url: url,
+		url: registerUrl,
 		data: data,
 		success: function(response) {
 			console.log(response);
+			if (response["status"] === 200) {
+				window.location.replace(afterRegisterUrl);
+			} else {
+				showErrors(response["errorPool"]);
+			}
 		},
 		error: function (response) {
 			console.log(response);

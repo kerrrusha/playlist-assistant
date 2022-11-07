@@ -12,6 +12,6 @@ public class SignoutServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		new AuthService(request).signout();
-		response.sendRedirect("index.jsp");
+		response.sendRedirect(getServletContext().getContextPath());
 	}
 }

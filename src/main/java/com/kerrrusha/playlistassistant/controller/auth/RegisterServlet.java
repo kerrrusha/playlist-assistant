@@ -25,8 +25,6 @@ public class RegisterServlet extends HttpServlet {
 
 		setJsonToResponse(response, gson.toJson(result));
 
-		if (result.isOK()) {
-			response.sendRedirect("index.jsp");
-		}
+		response.getWriter().flush();
 	}
 }

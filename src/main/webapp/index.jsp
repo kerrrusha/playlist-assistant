@@ -1,10 +1,11 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!doctype html>
 <html lang="en">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>Welcome</title>
+  <title>Playlist Assistant</title>
 
   <!-- Bootstrap core CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -17,71 +18,20 @@
 </head>
 
 <body class="text-center">
-<header>
-  <nav class="navbar navbar-expand-sm">
-    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
 
-    <div class="navbar-collapse justify-content-md-center align-items-md-center collapse" id="navbarsExample09" style="">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active h1">
-          <a class="nav-link" href="#">Playlist Assistant</a>
-        </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="#">My music</a>
-        </li> -->
-      </ul>
-    </div>
-  </nav>
-</header>
+<jsp:include page="partial-pages/header.jsp" />
 
-<main>
-  <p class="display-5 fs-3 text-decoration-underline">The place to get new music based on what you love</p>
+<c:choose>
+  <c:when test="${sessionScope.containsKey(\"uid\")}">
+    <jsp:include page="partial-pages/index-authorized.jsp" />
+  </c:when>
 
-  <div class="login-reg-panel">
-    <div class="login-info-box">
-      <h2>Already have an account?</h2>
-      <p></p>
-      <label id="label-register" for="log-reg-show">Login</label>
-      <input type="radio" name="active-log-panel" id="log-reg-show"  checked="checked">
-    </div>
+  <c:otherwise>
+    <jsp:include page="partial-pages/index-not-authorized.jsp" />
+  </c:otherwise>
+</c:choose>
 
-    <div class="register-info-box">
-      <h2>Don't have an account?</h2>
-      <p></p>
-      <label id="label-login" for="log-login-show">Register</label>
-      <input type="radio" name="active-log-panel" id="log-login-show">
-    </div>
-    <h1 class="bg-danger">${sessionScope.containsKey("uid")}</h1>
-    <div class="white-panel">
-      <div class="login-show">
-        <h2>LOGIN</h2>
-        <input type="text" placeholder="Nickname">
-        <input type="password" placeholder="Password">
-        <input onclick="processLogin('${pageContext.request.contextPath}/auth/login')" id="login" type="button" value="Login">
-        <a href="">Forgot password?</a>
-      </div>
-      <div class="register-show">
-        <h2>REGISTER</h2>
-        <input type="text" placeholder="Nickname">
-        <input type="password" placeholder="Password">
-        <input type="password" placeholder="Confirm Password">
-        <input onclick="processRegister('${pageContext.request.contextPath}/auth/register')" id="register" type="button" value="Register">
-      </div>
-      <div class="errors-block" style="visibility: hidden;">
-
-      </div>
-    </div>
-  </div>
-</main>
-
-<footer>
-  <div class="">
-    <p>By <a href="https://linkedin.com/in/kerrrusha" target="_blank">kerrrusha</a> ©</p>
-  </div>
-</footer>
-
+<jsp:include page="partial-pages/footer.jsp" />
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
