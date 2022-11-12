@@ -14,7 +14,7 @@ public class HttpGetterUtil {
 	private HttpGetterUtil() {}
 
 	public static String getResponseString(String url) throws IOException {
-		HttpGet request = new HttpGet(url);
+		HttpGet request = new HttpGet(prepareQuery(url));
 		try (CloseableHttpClient client = HttpClients.createDefault();
 		     CloseableHttpResponse response = client.execute(request)) {
 			HttpEntity entity = response.getEntity();
@@ -22,7 +22,7 @@ public class HttpGetterUtil {
 		}
 	}
 
-	public static String prepareTerm(String term)  {
-		return term.replaceAll(" ", "+");
+	private static String prepareQuery(String query)  {
+		return query.replaceAll(" ", "+");
 	}
 }

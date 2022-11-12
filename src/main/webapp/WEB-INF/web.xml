@@ -58,4 +58,15 @@
         <filter-name>IsAuthorizedFilter</filter-name>
         <url-pattern>/set-favourite-artists</url-pattern>
     </filter-mapping>
+
+    <listener>
+        <listener-class>
+            com.kerrrusha.playlistassistant.task_manager.BackgroundTaskManager
+        </listener-class>
+    </listener>
+
+    <context-param>
+        <param-name>log4j-config-location</param-name>
+        <param-value>WEB-INF/log4j.xml</param-value>
+    </context-param>
 </web-app>
