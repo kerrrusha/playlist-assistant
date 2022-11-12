@@ -5,6 +5,11 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.kerrrusha.playlistassistant.model.lastfm.LastFmTrack;
 import com.kerrrusha.playlistassistant.sound_parser.mapper.GsonMapper;
+import com.kerrrusha.playlistassistant.sound_parser.provider.lastfm.LastFmTrackJsonProvider;
+
+import java.util.Collection;
+
+import static java.util.stream.Collectors.toSet;
 
 public class LastFmTrackJsonMapper extends GsonMapper {
 
@@ -31,6 +36,25 @@ public class LastFmTrackJsonMapper extends GsonMapper {
 		track.setImageUrl(imageUrl);
 
 		return track;
+	}
+
+	public Collection<LastFmTrack> collectionFromJson(String jsonString) {
+		return jsonToElements(jsonString).stream()
+				.map(this::jsonToId)
+				.map(LastFmTrackJsonProvider::getResponse)
+				.map(elem -> jsonToElement(elem).toString())
+				.map(this::fromJson)
+				.collect(toSet());
+	}
+
+	private static Collection<JsonElement> jsonToElements(String json) {
+		JsonObject jsonObject = JsonParser.parseString(json).getAsJsonObject();
+		return jsonObject.getAsJsonObject("tracks").get("track").getAsJsonArray().asList();
+	}
+
+	private static JsonElement jsonToElement(String json) {
+		JsonObject jsonObject = JsonParser.parseString(json).getAsJsonObject();
+		return jsonObject.get("track");
 	}
 
 	public String toJson(LastFmTrack song) {

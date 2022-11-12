@@ -6,12 +6,12 @@ import com.google.gson.JsonParser;
 import com.kerrrusha.playlistassistant.model.lastfm.LastFmArtist;
 import com.kerrrusha.playlistassistant.model.lastfm.LastFmGenre;
 import com.kerrrusha.playlistassistant.sound_parser.mapper.GsonMapper;
+import com.kerrrusha.playlistassistant.sound_parser.provider.lastfm.LastFmArtistJsonProvider;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
-import static java.util.stream.Collectors.toCollection;
+import static java.util.stream.Collectors.toSet;
 
 public class LastFmArtistJsonMapper extends GsonMapper {
 
@@ -36,10 +36,30 @@ public class LastFmArtistJsonMapper extends GsonMapper {
 		return artist;
 	}
 
+	public Collection<LastFmArtist> collectionFromJson(String jsonString) {
+		return jsonToElements(jsonString).stream()
+				.map(this::jsonToId)
+				.map(LastFmArtistJsonProvider::getResponse)
+				.filter(jsonStr -> jsonStr.contains("mbid"))
+				.map(elem -> jsonToElement(elem).toString())
+				.map(this::fromJson)
+				.collect(toSet());
+	}
+
+	private static Collection<JsonElement> jsonToElements(String json) {
+		JsonObject jsonObject = JsonParser.parseString(json).getAsJsonObject();
+		return jsonObject.getAsJsonObject("topartists").get("artist").getAsJsonArray().asList();
+	}
+
+	private static JsonElement jsonToElement(String json) {
+		JsonObject jsonObject = JsonParser.parseString(json).getAsJsonObject();
+		return jsonObject.get("artist");
+	}
+
 	private Collection<LastFmArtist> resolveSimilar(JsonObject jsonObject) {
 		return jsonObject.get("similar").getAsJsonObject().get("artist").getAsJsonArray().asList().stream()
 				.map(this::mapToSimilarArtist)
-				.collect(toCollection(ArrayList<LastFmArtist>::new));
+				.collect(toSet());
 	}
 
 	private LastFmArtist mapToSimilarArtist(JsonElement jsonElement) {
@@ -57,7 +77,7 @@ public class LastFmArtistJsonMapper extends GsonMapper {
 	private Collection<LastFmGenre> resolveGenres(JsonObject jsonObject) {
 		return jsonObject.get("tags").getAsJsonObject().get("tag").getAsJsonArray().asList().stream()
 				.map(this::mapToSimilarGenre)
-				.collect(toCollection(ArrayList<LastFmGenre>::new));
+				.collect(toSet());
 	}
 
 	private LastFmGenre mapToSimilarGenre(JsonElement jsonElement) {
