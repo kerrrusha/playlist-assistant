@@ -1,6 +1,6 @@
 package com.kerrrusha.playlistassistant.model;
 
-public class Track extends Artist {
+public class AbstractTrack extends AbstractArtist {
 
 	protected String trackName;
 

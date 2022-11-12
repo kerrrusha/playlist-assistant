@@ -1,10 +1,10 @@
 package com.kerrrusha.playlistassistant.model.lastfm;
 
-import com.kerrrusha.playlistassistant.model.Track;
+import com.kerrrusha.playlistassistant.model.AbstractTrack;
 
 import java.util.Objects;
 
-public class LastFmTrack extends Track {
+public class LastFmTrack extends AbstractTrack {
 
 	private int playcount;
 	private String id, url, imageUrl;

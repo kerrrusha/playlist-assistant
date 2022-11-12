@@ -1,10 +1,10 @@
 package com.kerrrusha.playlistassistant.model.itunes;
 
-import com.kerrrusha.playlistassistant.model.Track;
+import com.kerrrusha.playlistassistant.model.AbstractTrack;
 
 import java.util.Date;
 
-public class ItunesTrack extends Track {
+public class ItunesTrack extends AbstractTrack {
 
 	private int artistId;
 	private int collectionId;

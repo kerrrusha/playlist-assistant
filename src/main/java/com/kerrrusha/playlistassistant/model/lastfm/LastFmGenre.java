@@ -1,9 +1,10 @@
 package com.kerrrusha.playlistassistant.model.lastfm;
 
-public class LastFmGenre implements Comparable<LastFmGenre> {
+import com.kerrrusha.playlistassistant.model.AbstractGenre;
+
+public class LastFmGenre extends AbstractGenre implements Comparable<LastFmGenre> {
 
 	private int count;
-	private String name;
 
 	public LastFmGenre() {}
 
@@ -13,14 +14,6 @@ public class LastFmGenre implements Comparable<LastFmGenre> {
 
 	public void setCount(int count) {
 		this.count = count;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	@Override

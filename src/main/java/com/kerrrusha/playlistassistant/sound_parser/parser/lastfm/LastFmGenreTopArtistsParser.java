@@ -3,8 +3,8 @@ package com.kerrrusha.playlistassistant.sound_parser.parser.lastfm;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.kerrrusha.playlistassistant.model.AbstractGenre;
 import com.kerrrusha.playlistassistant.model.lastfm.LastFmArtist;
-import com.kerrrusha.playlistassistant.model.lastfm.LastFmGenre;
 import com.kerrrusha.playlistassistant.sound_parser.mapper.lastfm.LastFmArtistJsonMapper;
 import com.kerrrusha.playlistassistant.sound_parser.http_gate.HttpGetterUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -22,7 +22,7 @@ public class LastFmGenreTopArtistsParser {
 	static final String GENRE_TOP_TRACKS_URL = String.format("https://ws.audioscrobbler.com/2.0/?method=tag.gettopartists&api_key=%s&format=json", API_KEY);
 	static final String FIND_ARTIST_URL = String.format("https://ws.audioscrobbler.com/2.0/?method=artist.getInfo&api_key=%s&format=json", API_KEY);
 
-	public Collection<LastFmArtist> getTopArtists(LastFmGenre genre) throws IOException {
+	public Collection<LastFmArtist> getTopArtists(AbstractGenre genre) throws IOException {
 		String artistsJson = getJsonTopArtistsByGenre(genre.getName());
 		LastFmArtistJsonMapper mapper = new LastFmArtistJsonMapper();
 		return jsonToElements(artistsJson).stream()

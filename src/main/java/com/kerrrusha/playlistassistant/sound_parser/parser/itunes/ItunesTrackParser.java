@@ -19,7 +19,7 @@ public class ItunesTrackParser {
 
 	static final String BASE_URL = "https://itunes.apple.com/search";
 
-	public Collection<ItunesTrack> getSongsByTerm(String term) throws IOException {
+	public Collection<ItunesTrack> getTracksByTerm(String term) throws IOException {
 		term = prepareTerm(term);
 
 		String responseJson = getResponseJsonStringFromTerm(term);

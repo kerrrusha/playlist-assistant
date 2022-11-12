@@ -28,7 +28,7 @@ public class LastFmArtistJsonMapper extends GsonMapper {
 
 		artist.setId(id);
 		artist.setPlaycount(playcount);
-		artist.setName(name);
+		artist.setArtistName(name);
 		artist.setUrl(url);
 		artist.setSimilar(similar);
 		artist.setGenres(genres);
@@ -48,7 +48,7 @@ public class LastFmArtistJsonMapper extends GsonMapper {
 		final String name = jsonElement.getAsJsonObject().get("name").getAsString();
 		final String url = jsonElement.getAsJsonObject().get("url").getAsString();
 
-		artist.setName(name);
+		artist.setArtistName(name);
 		artist.setUrl(url);
 
 		return artist;

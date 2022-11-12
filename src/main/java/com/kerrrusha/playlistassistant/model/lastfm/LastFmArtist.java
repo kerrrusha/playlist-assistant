@@ -1,11 +1,12 @@
 package com.kerrrusha.playlistassistant.model.lastfm;
 
+import com.kerrrusha.playlistassistant.model.AbstractArtist;
+
 import java.util.Collection;
 
-public class LastFmArtist {
+public class LastFmArtist extends AbstractArtist {
 
 	private String id;
-	private String name;
 	private String url;
 	private int playcount;
 	Collection<LastFmArtist> similar;
@@ -19,14 +20,6 @@ public class LastFmArtist {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getUrl() {
@@ -65,11 +58,11 @@ public class LastFmArtist {
 	public String toString() {
 		return "LastFmArtist{" +
 				"id='" + id + '\'' +
-				", name='" + name + '\'' +
 				", url='" + url + '\'' +
 				", playcount=" + playcount +
 				", similar=" + similar +
 				", genres=" + genres +
+				", artistName='" + artistName + '\'' +
 				'}';
 	}
 }
