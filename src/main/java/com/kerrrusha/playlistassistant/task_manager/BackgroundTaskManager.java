@@ -15,7 +15,7 @@ public class BackgroundTaskManager implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
 		scheduler = Executors.newSingleThreadScheduledExecutor();
-		scheduler.scheduleAtFixedRate(new SoundDataImportingTask(), 0, 1, TimeUnit.DAYS);
+		//scheduler.scheduleAtFixedRate(new SoundDataImportingTask(), 0, 1, TimeUnit.DAYS);
 	}
 
 	@Override

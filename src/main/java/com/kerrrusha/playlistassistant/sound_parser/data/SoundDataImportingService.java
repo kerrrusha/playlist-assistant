@@ -15,9 +15,11 @@ import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collection;
 
+import static com.kerrrusha.playlistassistant.sound_parser.data.constant.SoundDataPaths.BASE_PATH;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toSet;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
@@ -32,6 +34,7 @@ public class SoundDataImportingService {
 	private static final int SIMILAR_ARTISTS_TOP_TRACKS_LIMIT = 3;
 
 	public void importAll() {
+		logger.info("SoundDataImportingService task is started.");
 		try {
 			final String genresJson = getTopGenresJson();
 			saveToFile(SoundDataPaths.TOP_GENRES_PATH, genresJson);
@@ -45,8 +48,9 @@ public class SoundDataImportingService {
 			final Collection<String> topTracksJson = getTopTracksJson(similarArtists);
 			saveToFile(SoundDataPaths.SIMILAR_ARTISTS_TOP_TRACKS_PATH, topTracksJson.stream().collect(joining(System.lineSeparator())));
 		} catch (IOException e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
+		logger.info("SoundDataImportingService task finished.");
 	}
 
 	private Collection<String> mapToLastFmArtistsJson(Collection<String> topArtistsJson) {
@@ -108,7 +112,27 @@ public class SoundDataImportingService {
 				.collect(toSet());
 	}
 
-	private void saveToFile(String filename, String data) throws IOException {
-		Files.write(Paths.get(filename), data.getBytes());
+	private void saveToFile(String filepath, String data) throws IOException {
+		final Path path = Paths.get(filepath);
+		fixPossibleIOErrors(path);
+		Files.write(path, data.getBytes());
+	}
+
+	private void fixPossibleIOErrors(Path path) throws IOException {
+		createBaseDirectoryIfNotExists();
+		createFileIfNotExists(path);
+	}
+
+	private void createBaseDirectoryIfNotExists() throws IOException {
+		final Path basePath = Paths.get(BASE_PATH.replaceAll("/", ""));
+		if (!Files.exists(basePath)) {
+			Files.createDirectory(basePath);
+		}
+	}
+
+	private void createFileIfNotExists(Path path) throws IOException {
+		if (!Files.exists(path)) {
+			Files.createFile(path);
+		}
 	}
 }

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html lang="en">
   <head>
@@ -24,42 +25,12 @@
           <span class="fs-5">Show new artists</span>
         </button>
         <div class="d-flex flex-row my-4 flex-wrap justify-content-center">
-          <div class="entity">
-            <img src="https://lastfm.freetls.fastly.net/i/u/500x500/6669b1216a3c48fb879211fa0a2fa8c3.jpg">
-            <span>Metallica</span>
-          </div>
-          <div class="entity">
-            <img src="https://lastfm.freetls.fastly.net/i/u/500x500/6669b1216a3c48fb879211fa0a2fa8c3.jpg">
-            <span>Metallica</span>
-          </div>
-          <div class="entity">
-            <img src="https://lastfm.freetls.fastly.net/i/u/500x500/6669b1216a3c48fb879211fa0a2fa8c3.jpg">
-            <span>Metallica</span>
-          </div>
-          <div class="entity">
-            <img src="https://lastfm.freetls.fastly.net/i/u/500x500/6669b1216a3c48fb879211fa0a2fa8c3.jpg">
-            <span>Metallica</span>
-          </div>
-          <div class="entity">
-            <img src="https://lastfm.freetls.fastly.net/i/u/500x500/6669b1216a3c48fb879211fa0a2fa8c3.jpg">
-            <span>Metallica</span>
-          </div>
-          <div class="entity">
-            <img src="https://lastfm.freetls.fastly.net/i/u/500x500/6669b1216a3c48fb879211fa0a2fa8c3.jpg">
-            <span>Metallica</span>
-          </div>
-          <div class="entity">
-            <img src="https://lastfm.freetls.fastly.net/i/u/500x500/6669b1216a3c48fb879211fa0a2fa8c3.jpg">
-            <span>Metallica</span>
-          </div>
-          <div class="entity">
-            <img src="https://lastfm.freetls.fastly.net/i/u/500x500/6669b1216a3c48fb879211fa0a2fa8c3.jpg">
-            <span>Metallica</span>
-          </div>
-          <div class="entity">
-            <img src="https://lastfm.freetls.fastly.net/i/u/500x500/6669b1216a3c48fb879211fa0a2fa8c3.jpg">
-            <span>Metallica</span>
-          </div>
+          <c:forEach var="var" items="${model.getArtists()}">
+            <div class="entity">
+              <img src="https://lastfm.freetls.fastly.net/i/u/500x500/6669b1216a3c48fb879211fa0a2fa8c3.jpg">
+              <span><c:out value="${var.getArtistName()}"/></span>
+            </div>
+          </c:forEach>
         </div>
       </div>
     </main>

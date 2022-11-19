@@ -23,7 +23,7 @@ public class HttpGetterUtil {
 
 	public static String getResponseString(String url) throws IOException {
 		url = prepareUrl(url);
-		logger.debug("Request: " + url);
+		logger.info("Request: " + url);
 		HttpGet request = new HttpGet(url);
 		try (CloseableHttpClient client = HttpClients.createDefault();
 		     CloseableHttpResponse response = client.execute(request)) {

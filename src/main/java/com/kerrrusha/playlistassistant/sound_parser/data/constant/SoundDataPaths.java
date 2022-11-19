@@ -2,7 +2,7 @@ package com.kerrrusha.playlistassistant.sound_parser.data.constant;
 
 public class SoundDataPaths {
 
-	private static final String BASE_PATH = "sound-data/";
+	public static final String BASE_PATH = "sound-data/";
 
 	public static final String TOP_GENRES_PATH = BASE_PATH + "top-genres.json";
 	public static final String TOP_GENRE_ARTISTS_PATH = BASE_PATH + "top-genre-artists.json";
