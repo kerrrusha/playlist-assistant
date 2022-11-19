@@ -1,4 +1,4 @@
-package com.kerrrusha.playlist_assistant;
+package com.kerrrusha.playlist_assistant.sound_parser.http_gate;
 
 import com.kerrrusha.playlistassistant.sound_parser.http_gate.UrlBuilder;
 import org.junit.Test;

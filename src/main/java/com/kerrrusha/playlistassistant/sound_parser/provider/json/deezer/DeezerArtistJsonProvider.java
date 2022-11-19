@@ -1,5 +1,4 @@
-package com.kerrrusha.playlistassistant.sound_parser.provider.deezer;
-
+package com.kerrrusha.playlistassistant.sound_parser.provider.json.deezer;
 import java.io.IOException;
 
 import static com.kerrrusha.playlistassistant.sound_parser.http_gate.HttpGetterUtil.getResponseString;

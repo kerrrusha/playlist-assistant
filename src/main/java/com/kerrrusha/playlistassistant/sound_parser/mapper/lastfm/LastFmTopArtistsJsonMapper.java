@@ -6,16 +6,17 @@ import com.google.gson.JsonParser;
 import com.kerrrusha.playlistassistant.model.lastfm.LastFmArtist;
 import com.kerrrusha.playlistassistant.model.lastfm.LastFmGenre;
 import com.kerrrusha.playlistassistant.sound_parser.mapper.GsonMapper;
+import com.kerrrusha.playlistassistant.sound_parser.provider.json.lastfm.LastFmArtistJsonProvider;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collection;
 
 import static java.util.stream.Collectors.toSet;
 
-public class LastFmArtistJsonMapper extends GsonMapper {
+public class LastFmTopArtistsJsonMapper extends GsonMapper {
 
 	public LastFmArtist fromJson(String jsonString) {
-		JsonObject jsonObject = JsonParser.parseString(jsonString).getAsJsonObject()
-				.get("artist").getAsJsonObject();
+		JsonObject jsonObject = JsonParser.parseString(jsonString).getAsJsonObject();
 		LastFmArtist artist = new LastFmArtist();
 
 		final String id = jsonObject.get("mbid").getAsString();
@@ -33,6 +34,26 @@ public class LastFmArtistJsonMapper extends GsonMapper {
 		artist.setGenres(genres);
 
 		return artist;
+	}
+
+	public Collection<LastFmArtist> collectionFromJson(String jsonString) {
+		return jsonToElements(jsonString).stream()
+				.map(this::jsonToId)
+				.map(LastFmArtistJsonProvider::getResponse)
+				.filter(jsonStr -> jsonStr.contains("mbid"))
+				.map(elem -> jsonToElement(elem).toString())
+				.map(this::fromJson)
+				.collect(toSet());
+	}
+
+	private static Collection<JsonElement> jsonToElements(String json) {
+		JsonObject jsonObject = JsonParser.parseString(json).getAsJsonObject();
+		return jsonObject.getAsJsonObject("topartists").get("artist").getAsJsonArray().asList();
+	}
+
+	private static JsonElement jsonToElement(String json) {
+		JsonObject jsonObject = JsonParser.parseString(json).getAsJsonObject();
+		return jsonObject.get("artist");
 	}
 
 	private Collection<LastFmArtist> resolveSimilar(JsonObject jsonObject) {
@@ -70,5 +91,13 @@ public class LastFmArtistJsonMapper extends GsonMapper {
 
 	public String toJson(LastFmArtist artist) {
 		return gson.toJson(artist);
+	}
+
+	public String jsonToId(JsonElement jsonElement) {
+		try {
+			return jsonElement.getAsJsonObject().get("mbid").getAsString();
+		} catch(Throwable ignored) {
+			return StringUtils.EMPTY;
+		}
 	}
 }

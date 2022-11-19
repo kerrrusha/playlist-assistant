@@ -1,4 +1,4 @@
-package com.kerrrusha.playlistassistant.sound_parser.provider.itunes;
+package com.kerrrusha.playlistassistant.sound_parser.provider.json.itunes;
 
 import com.kerrrusha.playlistassistant.sound_parser.http_gate.HttpGetterUtil;
 import com.kerrrusha.playlistassistant.sound_parser.http_gate.UrlBuilder;
