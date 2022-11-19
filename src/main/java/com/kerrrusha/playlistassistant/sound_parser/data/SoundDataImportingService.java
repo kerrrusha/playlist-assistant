@@ -7,6 +7,7 @@ import com.kerrrusha.playlistassistant.model.lastfm.LastFmArtist;
 import com.kerrrusha.playlistassistant.sound_parser.data.constant.SoundDataPaths;
 import com.kerrrusha.playlistassistant.sound_parser.mapper.lastfm.LastFmTopGenreJsonMapper;
 import com.kerrrusha.playlistassistant.sound_parser.mapper.lastfm.LastFmTopArtistsJsonMapper;
+import com.kerrrusha.playlistassistant.sound_parser.provider.json.deezer.DeezerArtistJsonProvider;
 import com.kerrrusha.playlistassistant.sound_parser.provider.json.itunes.ItunesTrackJsonProvider;
 import com.kerrrusha.playlistassistant.sound_parser.provider.json.lastfm.LastFmArtistJsonProvider;
 import com.kerrrusha.playlistassistant.sound_parser.provider.json.lastfm.LastFmGenreTopArtistsJsonProvider;
@@ -43,7 +44,12 @@ public class SoundDataImportingService {
 			final Collection<String> lastFmTopArtistsJson = mapToLastFmArtistsJson(topArtistsJson);
 			saveToFile(SoundDataPaths.TOP_GENRE_ARTISTS_PATH, lastFmTopArtistsJson.stream().collect(joining(System.lineSeparator())));
 
-			final Collection<AbstractArtist> similarArtists = mapToSimilarArtists(mapToLastFmArtists(topArtistsJson));
+			final Collection<LastFmArtist> lastFmTopArtists = mapToLastFmArtists(topArtistsJson);
+
+			final Collection<String> presentableTopArtistsJson = mapToPresentableArtistsJson(lastFmTopArtists);
+			saveToFile(SoundDataPaths.PRESENTABLE_TOP_GENRE_ARTISTS_PATH, presentableTopArtistsJson.stream().collect(joining(System.lineSeparator())));
+
+			final Collection<AbstractArtist> similarArtists = mapToSimilarArtists(lastFmTopArtists);
 
 			final Collection<String> topTracksJson = getTopTracksJson(similarArtists);
 			saveToFile(SoundDataPaths.SIMILAR_ARTISTS_TOP_TRACKS_PATH, topTracksJson.stream().collect(joining(System.lineSeparator())));
@@ -51,6 +57,13 @@ public class SoundDataImportingService {
 			logger.error(e);
 		}
 		logger.info("SoundDataImportingService task finished.");
+	}
+
+	private Collection<String> mapToPresentableArtistsJson(Collection<LastFmArtist> lastFmTopArtists) {
+		return lastFmTopArtists.stream()
+				.map(LastFmArtist::getArtistName)
+				.map(DeezerArtistJsonProvider::getResponse)
+				.collect(toSet());
 	}
 
 	private Collection<String> mapToLastFmArtistsJson(Collection<String> topArtistsJson) {

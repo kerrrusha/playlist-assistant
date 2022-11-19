@@ -3,6 +3,8 @@ package com.kerrrusha.playlistassistant.sound_parser.data;
 import com.kerrrusha.playlistassistant.model.itunes.ItunesTrack;
 import com.kerrrusha.playlistassistant.model.lastfm.LastFmArtist;
 import com.kerrrusha.playlistassistant.model.lastfm.LastFmGenre;
+import com.kerrrusha.playlistassistant.model.presentable.PresentableArtist;
+import com.kerrrusha.playlistassistant.sound_parser.mapper.PresentableArtistJsonMapper;
 import com.kerrrusha.playlistassistant.sound_parser.mapper.itunes.ItunesTrackJsonMapper;
 import com.kerrrusha.playlistassistant.sound_parser.mapper.lastfm.LastFmArtistJsonMapper;
 import com.kerrrusha.playlistassistant.sound_parser.mapper.lastfm.LastFmTopGenreJsonMapper;
@@ -22,6 +24,7 @@ public class SoundDataReader {
 
 	private static final LastFmTopGenreJsonMapper topGenreMapper = new LastFmTopGenreJsonMapper();
 	private static final LastFmArtistJsonMapper topGenreArtistsMapper = new LastFmArtistJsonMapper();
+	private static final PresentableArtistJsonMapper presentableTopGenreArtistsMapper = new PresentableArtistJsonMapper();
 	private static final ItunesTrackJsonMapper similarArtistsTopTracksMapper = new ItunesTrackJsonMapper();
 
 	public boolean dataFilesIsOk() {
@@ -47,6 +50,19 @@ public class SoundDataReader {
 					.collect(toSet());
 			return topGenreArtistsJson.stream()
 					.map(topGenreArtistsMapper::fromJson)
+					.collect(toSet());
+		} catch (IOException e) {
+			return new HashSet<>();
+		}
+	}
+
+	public Collection<PresentableArtist> readPresentableTopGenreArtists() {
+		try {
+			final Collection<String> presentableTopGenreArtistsJson = Arrays.stream(new String(Files.readAllBytes(Paths.get(PRESENTABLE_TOP_GENRE_ARTISTS_PATH)),
+							StandardCharsets.UTF_8).split(System.lineSeparator()))
+					.collect(toSet());
+			return presentableTopGenreArtistsJson.stream()
+					.map(presentableTopGenreArtistsMapper::fromJson)
 					.collect(toSet());
 		} catch (IOException e) {
 			return new HashSet<>();

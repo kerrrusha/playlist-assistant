@@ -7,6 +7,6 @@ public class SoundDataImportingServiceTest {
 
 	@Test
 	public void testNotThrows() {
-		//new SoundDataImportingService().importAll();
+		new SoundDataImportingService().importAll();
 	}
 }
