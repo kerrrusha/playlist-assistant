@@ -5,59 +5,76 @@ import com.kerrrusha.playlistassistant.model.lastfm.LastFmArtist;
 import com.kerrrusha.playlistassistant.model.lastfm.LastFmGenre;
 import com.kerrrusha.playlistassistant.model.presentable.PresentableArtist;
 
-import java.util.Collection;
-import java.util.HashSet;
-
 public class SoundDataCache {
 
-	private Collection<LastFmGenre> topGenres;
-	private Collection<LastFmArtist> topGenreArtists;
-	private Collection<PresentableArtist> presentableTopGenreArtists;
-	private Collection<ItunesTrack> similarArtistsTopTracks;
+	private SoundDataEntry<LastFmGenre> topGenres;
+	private SoundDataEntry<LastFmArtist> topGenreArtists;
+	private SoundDataEntry<PresentableArtist> presentableTopGenreArtists;
+	private SoundDataEntry<ItunesTrack> similarArtistsTopTracks;
 
 	public SoundDataCache() {
-		topGenres = new HashSet<>();
-		topGenreArtists = new HashSet<>();
-		presentableTopGenreArtists = new HashSet<>();
-		similarArtistsTopTracks = new HashSet<>();
+		topGenres = new SoundDataEntry<>();
+		topGenreArtists = new SoundDataEntry<>();
+		presentableTopGenreArtists = new SoundDataEntry<>();
+		similarArtistsTopTracks = new SoundDataEntry<>();
 	}
 
-	protected void copyValues(SoundDataCache otherCache) {
+	protected void setValues(SoundDataCache otherCache) {
 		setTopGenres(otherCache.getTopGenres());
 		setTopGenreArtists(otherCache.getTopGenreArtists());
 		setPresentableTopGenreArtists(otherCache.getPresentableTopGenreArtists());
 		setSimilarArtistsTopTracks(otherCache.getSimilarArtistsTopTracks());
 	}
 
-	public Collection<LastFmGenre> getTopGenres() {
+	protected int removeEmptyValues() {
+		int totalRemoved = 0;
+
+		totalRemoved += topGenres.removeEmptyValues();
+		totalRemoved += topGenreArtists.removeEmptyValues();
+		totalRemoved += presentableTopGenreArtists.removeEmptyValues();
+		totalRemoved += similarArtistsTopTracks.removeEmptyValues();
+
+		return totalRemoved;
+	}
+
+	@Override
+	public String toString() {
+		return "Top genres - " + getTopGenres().size() + System.lineSeparator() +
+				"Top genre artists - " + getTopGenreArtists().size() + System.lineSeparator() +
+				"Presentable top genre artists - " + getPresentableTopGenreArtists().size() + System.lineSeparator() +
+				"Similar artists top tracks - " + getSimilarArtistsTopTracks().size();
+	}
+
+	public SoundDataEntry<LastFmGenre> getTopGenres() {
 		return topGenres;
 	}
 
-	protected void setTopGenres(Collection<LastFmGenre> topGenres) {
+	public void setTopGenres(SoundDataEntry<LastFmGenre> topGenres) {
 		this.topGenres = topGenres;
 	}
 
-	public Collection<LastFmArtist> getTopGenreArtists() {
+	public SoundDataEntry<LastFmArtist> getTopGenreArtists() {
 		return topGenreArtists;
 	}
 
-	protected void setTopGenreArtists(Collection<LastFmArtist> topGenreArtists) {
+	public void setTopGenreArtists(SoundDataEntry<LastFmArtist> topGenreArtists) {
 		this.topGenreArtists = topGenreArtists;
 	}
 
-	public Collection<PresentableArtist> getPresentableTopGenreArtists() {
+	public SoundDataEntry<PresentableArtist> getPresentableTopGenreArtists() {
 		return presentableTopGenreArtists;
 	}
 
-	protected void setPresentableTopGenreArtists(Collection<PresentableArtist> presentableTopGenreArtists) {
+	public void setPresentableTopGenreArtists(SoundDataEntry<PresentableArtist> presentableTopGenreArtists) {
 		this.presentableTopGenreArtists = presentableTopGenreArtists;
 	}
 
-	public Collection<ItunesTrack> getSimilarArtistsTopTracks() {
+	public SoundDataEntry<ItunesTrack> getSimilarArtistsTopTracks() {
 		return similarArtistsTopTracks;
 	}
 
-	protected void setSimilarArtistsTopTracks(Collection<ItunesTrack> similarArtistsTopTracks) {
+	public void setSimilarArtistsTopTracks(SoundDataEntry<ItunesTrack> similarArtistsTopTracks) {
 		this.similarArtistsTopTracks = similarArtistsTopTracks;
 	}
 }
+

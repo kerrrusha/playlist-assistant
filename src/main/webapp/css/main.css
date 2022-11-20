@@ -53,8 +53,8 @@ button {
   color: black;
 }
 .entity img {
-  width: 15vw;
-  height: 15vw;
+  width: 10vw;
+  height: 10vw;
 }
 .entity-selected {
   background-color: rgba(255,255,255,0.6);

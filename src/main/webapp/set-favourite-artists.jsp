@@ -27,7 +27,7 @@
         <div class="d-flex flex-row my-4 flex-wrap justify-content-center">
           <c:forEach var="var" items="${model.getArtists()}">
             <div class="entity">
-              <img src="https://lastfm.freetls.fastly.net/i/u/500x500/6669b1216a3c48fb879211fa0a2fa8c3.jpg">
+              <img src="<c:out value="${var.getPhotoUrl()}"/>">
               <span><c:out value="${var.getArtistName()}"/></span>
             </div>
           </c:forEach>

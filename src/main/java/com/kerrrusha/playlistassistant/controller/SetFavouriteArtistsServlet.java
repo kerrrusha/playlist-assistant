@@ -14,7 +14,7 @@ public class SetFavouriteArtistsServlet  extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		SetFavouriteArtistsViewModel viewModel = new SetFavouriteArtistsViewModel();
 
-		viewModel.setArtists(SoundDataProvider.getInstance().getTopGenreArtists());
+		viewModel.setArtists(SoundDataProvider.getInstance().getPresentableTopGenreArtists().shuffle());
 
 		request.setAttribute("model", viewModel);
 		request.getRequestDispatcher("set-favourite-artists.jsp").forward(request, response);

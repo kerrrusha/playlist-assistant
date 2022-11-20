@@ -15,9 +15,9 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
 
 import static com.kerrrusha.playlistassistant.sound_parser.data.constant.SoundDataPaths.*;
 import static java.util.stream.Collectors.toSet;
@@ -34,6 +34,7 @@ public class SoundDataReader {
 	public boolean dataFilesIsOk() {
 		return Files.exists(Paths.get(TOP_GENRES_PATH))
 				&& Files.exists(Paths.get(TOP_GENRE_ARTISTS_PATH))
+				&& Files.exists(Paths.get(PRESENTABLE_TOP_GENRE_ARTISTS_PATH))
 				&& Files.exists(Paths.get(SIMILAR_ARTISTS_TOP_TRACKS_PATH));
 	}
 
@@ -43,8 +44,8 @@ public class SoundDataReader {
 					StandardCharsets.UTF_8);
 			return topGenreMapper.collectionFromJson(topGenresJson);
 		} catch (IOException e) {
-			logger.warn(e.getMessage());
-			return new HashSet<>();
+			logger.error(e);
+			return new ArrayList<>();
 		}
 	}
 
@@ -57,8 +58,8 @@ public class SoundDataReader {
 					.map(topGenreArtistsMapper::fromJson)
 					.collect(toSet());
 		} catch (IOException e) {
-			logger.warn(e.getMessage());
-			return new HashSet<>();
+			logger.error(e);
+			return new ArrayList<>();
 		}
 	}
 
@@ -72,8 +73,8 @@ public class SoundDataReader {
 					.map(PresentableArtistFactory::parseArtist)
 					.collect(toSet());
 		} catch (IOException e) {
-			logger.warn(e.getMessage());
-			return new HashSet<>();
+			logger.error(e);
+			return new ArrayList<>();
 		}
 	}
 
@@ -88,8 +89,8 @@ public class SoundDataReader {
 					.flatMap(Collection::stream)
 					.collect(toSet());
 		} catch (IOException e) {
-			logger.warn(e.getMessage());
-			return new HashSet<>();
+			logger.error(e);
+			return new ArrayList<>();
 		}
 	}
 }

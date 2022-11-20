@@ -10,8 +10,8 @@ import com.kerrrusha.playlistassistant.sound_parser.parser.lastfm.LastFmGenreTop
 import com.kerrrusha.playlistassistant.sound_parser.parser.lastfm.LastFmTopGenreParser;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 
 import static java.util.stream.Collectors.toSet;
 
@@ -51,7 +51,7 @@ public class SetFavouriteArtistService {
 				System.out.println("Attempt " + currentAttempt + "/" + MAX_ATTEMPTS);
 			}
 		}
-		return new HashSet<>();
+		return new ArrayList<>();
 	}
 
 	private PresentableArtist mapToPresentableArtist(AbstractArtist artist) {

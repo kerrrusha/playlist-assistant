@@ -1,18 +1,18 @@
 package com.kerrrusha.playlistassistant.viewmodel;
 
-import com.kerrrusha.playlistassistant.model.lastfm.LastFmArtist;
+import com.kerrrusha.playlistassistant.model.presentable.PresentableArtist;
 
 import java.util.Collection;
 
 public class SetFavouriteArtistsViewModel {
 
-	private Collection<LastFmArtist> artists;
+	private Collection<PresentableArtist> artists;
 
-	public Collection<LastFmArtist> getArtists() {
+	public Collection<PresentableArtist> getArtists() {
 		return artists;
 	}
 
-	public void setArtists(Collection<LastFmArtist> artists) {
+	public void setArtists(Collection<PresentableArtist> artists) {
 		this.artists = artists;
 	}
 }
