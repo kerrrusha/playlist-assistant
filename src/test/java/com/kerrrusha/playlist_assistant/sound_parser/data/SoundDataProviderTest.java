@@ -3,6 +3,7 @@ package com.kerrrusha.playlist_assistant.sound_parser.data;
 import com.kerrrusha.playlistassistant.model.itunes.ItunesTrack;
 import com.kerrrusha.playlistassistant.model.lastfm.LastFmArtist;
 import com.kerrrusha.playlistassistant.model.lastfm.LastFmGenre;
+import com.kerrrusha.playlistassistant.model.presentable.PresentableArtist;
 import com.kerrrusha.playlistassistant.sound_parser.data.SoundDataProvider;
 import org.junit.Test;
 
@@ -24,6 +25,13 @@ public class SoundDataProviderTest {
 		Collection<LastFmArtist> topGenreArtists = SoundDataProvider.getInstance().getTopGenreArtists();
 		System.out.println("Collected " + topGenreArtists.size() + " elements");
 		assertTrue(topGenreArtists.size() > 0);
+	}
+
+	@Test
+	public void assertPresentableTopGenreArtistsAreCollected() {
+		Collection<PresentableArtist> presentableTopGenreArtists = SoundDataProvider.getInstance().getPresentableTopGenreArtists();
+		System.out.println("Collected " + presentableTopGenreArtists.size() + " elements");
+		assertTrue(presentableTopGenreArtists.size() > 0);
 	}
 
 	@Test
