@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <c:choose>
-  <c:when test="${sessionScope.containsKey(\"uid\")}">
+  <c:when test="${sessionScope.containsKey(\"user\")}">
     <jsp:include page="header-authorized.jsp" />
   </c:when>
 

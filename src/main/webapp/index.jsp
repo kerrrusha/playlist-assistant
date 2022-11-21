@@ -22,7 +22,7 @@
 <jsp:include page="partial-pages/header.jsp" />
 
 <c:choose>
-  <c:when test="${sessionScope.containsKey(\"uid\")}">
+  <c:when test="${sessionScope.containsKey(\"user\")}">
     <jsp:include page="partial-pages/index-authorized.jsp" />
   </c:when>
 

@@ -9,7 +9,7 @@
         <li class="nav-item active">
           <div class="d-flex flex-column" style="line-height: 1">
             <span class="display-6" style="font-size: 15px;">Logged as:</span>
-            <span class="h4 m-0">testUser</span>
+            <span class="h4 m-0">${sessionScope.user.getLogin()}</span>
           </div>
         </li>
         <li class="nav-item active h1">

@@ -21,8 +21,12 @@
         <servlet-class>com.kerrrusha.playlistassistant.controller.auth.SignoutServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>SelectFavouriteArtistsServlet</servlet-name>
+        <servlet-class>com.kerrrusha.playlistassistant.controller.SelectFavouriteArtistsServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>SetFavouriteArtistsServlet</servlet-name>
-        <servlet-class>com.kerrrusha.playlistassistant.controller.SetFavouriteArtistsServlet</servlet-class>
+        <servlet-class>com.kerrrusha.playlistassistant.controller.user.SetFavouriteArtistsServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -42,8 +46,12 @@
         <url-pattern>/auth/signout</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>SelectFavouriteArtistsServlet</servlet-name>
+        <url-pattern>/select-favourite-artists</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>SetFavouriteArtistsServlet</servlet-name>
-        <url-pattern>/set-favourite-artists</url-pattern>
+        <url-pattern>/user/set-favourite-artists</url-pattern>
     </servlet-mapping>
 
     <filter>

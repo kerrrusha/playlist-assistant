@@ -20,7 +20,7 @@ public class LoginServlet extends HttpServlet {
 		final String password = request.getParameter("password");
 
 		AuthResult result = new LoginService(login, password).processLogin();
-		new AuthService(request).authenticate(result.getUserId());
+		new AuthService(request).authenticate(result.getUser());
 
 		setJsonToResponse(response, gson.toJson(result));
 

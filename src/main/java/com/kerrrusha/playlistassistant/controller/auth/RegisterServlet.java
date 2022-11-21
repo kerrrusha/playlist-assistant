@@ -21,7 +21,7 @@ public class RegisterServlet extends HttpServlet {
 		final String passwordRepeat = request.getParameter("passwordRepeat");
 
 		AuthResult result = new RegisterService(login, password, passwordRepeat).processRegister();
-		new AuthService(request).authenticate(result.getUserId());
+		new AuthService(request).authenticate(result.getUser());
 
 		setJsonToResponse(response, gson.toJson(result));
 

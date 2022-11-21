@@ -1,15 +1,19 @@
 package com.kerrrusha.playlistassistant.service.auth;
 
+import com.kerrrusha.playlistassistant.dao.DBException;
+import com.kerrrusha.playlistassistant.dao.user.UserDao;
+import com.kerrrusha.playlistassistant.model.User;
 import com.kerrrusha.playlistassistant.service.auth.result.AuthResult;
 import com.kerrrusha.playlistassistant.validator.AbstractValidator;
 import com.kerrrusha.playlistassistant.validator.auth.LoginValidator;
 import org.apache.http.HttpStatus;
+import org.apache.log4j.Logger;
 
 import java.util.Collection;
 
-import static com.kerrrusha.playlistassistant.util.DaoUtil.getUserId;
-
 public class LoginService {
+
+	private static final Logger logger = Logger.getLogger(LoginService.class);
 
 	private static final int OK_STATUS = HttpStatus.SC_OK;
 	private static final int ERROR_STATUS = HttpStatus.SC_CONFLICT;
@@ -34,7 +38,16 @@ public class LoginService {
 		}
 
 		result.setStatus(OK_STATUS);
-		result.setUserId(getUserId(login));
+		result.setUser(getUser());
 		return result;
+	}
+
+	private User getUser() {
+		try {
+			return new UserDao().findOneByLogin(login);
+		} catch (DBException e) {
+			logger.error(e);
+			throw new RuntimeException(e);
+		}
 	}
 }
