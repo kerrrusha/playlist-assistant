@@ -6,6 +6,7 @@ import com.google.gson.JsonParser;
 import com.kerrrusha.playlistassistant.model.lastfm.LastFmArtist;
 import com.kerrrusha.playlistassistant.model.lastfm.LastFmGenre;
 import com.kerrrusha.playlistassistant.sound_parser.mapper.GsonMapper;
+import org.apache.log4j.Logger;
 
 import java.util.Collection;
 
@@ -13,24 +14,34 @@ import static java.util.stream.Collectors.toSet;
 
 public class LastFmArtistJsonMapper extends GsonMapper {
 
+	private static final Logger logger = Logger.getLogger(LastFmArtistJsonMapper.class);
+
 	public LastFmArtist fromJson(String jsonString) {
-		JsonObject jsonObject = JsonParser.parseString(jsonString).getAsJsonObject()
-				.get("artist").getAsJsonObject();
 		LastFmArtist artist = new LastFmArtist();
+		try {
+			JsonObject jsonObject = JsonParser.parseString(jsonString).getAsJsonObject()
+				.get("artist").getAsJsonObject();
 
-		final String id = jsonObject.get("mbid").getAsString();
-		final int playcount = jsonObject.get("stats").getAsJsonObject().get("playcount").getAsInt();
-		final String name = jsonObject.get("name").getAsString();
-		final String url = jsonObject.get("url").getAsString();
-		final Collection<LastFmArtist> similar = resolveSimilar(jsonObject);
-		final Collection<LastFmGenre> genres = resolveGenres(jsonObject);
+			final String id = jsonObject.get("mbid").getAsString();
+			artist.setId(id);
 
-		artist.setId(id);
-		artist.setPlaycount(playcount);
-		artist.setArtistName(name);
-		artist.setUrl(url);
-		artist.setSimilar(similar);
-		artist.setGenres(genres);
+			final int playcount = jsonObject.get("stats").getAsJsonObject().get("playcount").getAsInt();
+			artist.setPlaycount(playcount);
+
+			final String name = jsonObject.get("name").getAsString();
+			artist.setArtistName(name);
+
+			final String url = jsonObject.get("url").getAsString();
+			artist.setUrl(url);
+
+			final Collection<LastFmArtist> similar = resolveSimilar(jsonObject);
+			artist.setSimilar(similar);
+
+			final Collection<LastFmGenre> genres = resolveGenres(jsonObject);
+			artist.setGenres(genres);
+		} catch (Throwable e) {
+			logger.warn(jsonString + System.lineSeparator() + e);
+		}
 
 		return artist;
 	}

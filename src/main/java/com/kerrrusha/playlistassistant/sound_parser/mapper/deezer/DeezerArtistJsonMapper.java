@@ -23,7 +23,7 @@ public class DeezerArtistJsonMapper extends GsonMapper {
 			final String photoUrl = jsonObject.get("picture_medium").getAsString();
 			artist.setPhotoUrl(photoUrl);
 		} catch (Throwable e) {
-			logger.warn(e);
+			logger.warn(jsonString + System.lineSeparator() + e);
 		}
 		return artist;
 	}

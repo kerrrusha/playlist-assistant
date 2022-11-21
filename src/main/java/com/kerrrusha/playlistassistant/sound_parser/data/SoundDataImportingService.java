@@ -5,8 +5,8 @@ import com.kerrrusha.playlistassistant.model.AbstractArtist;
 import com.kerrrusha.playlistassistant.model.AbstractGenre;
 import com.kerrrusha.playlistassistant.model.lastfm.LastFmArtist;
 import com.kerrrusha.playlistassistant.sound_parser.data.constant.SoundDataPaths;
+import com.kerrrusha.playlistassistant.sound_parser.mapper.lastfm.LastFmArtistJsonMapper;
 import com.kerrrusha.playlistassistant.sound_parser.mapper.lastfm.LastFmTopGenreJsonMapper;
-import com.kerrrusha.playlistassistant.sound_parser.mapper.lastfm.LastFmTopArtistsJsonMapper;
 import com.kerrrusha.playlistassistant.sound_parser.provider.json.deezer.DeezerArtistJsonProvider;
 import com.kerrrusha.playlistassistant.sound_parser.provider.json.itunes.ItunesTrackJsonProvider;
 import com.kerrrusha.playlistassistant.sound_parser.provider.json.lastfm.LastFmArtistJsonProvider;
@@ -18,7 +18,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 import static com.kerrrusha.playlistassistant.sound_parser.data.constant.SoundDataPaths.BASE_PATH;
 import static java.util.stream.Collectors.joining;
@@ -44,7 +47,7 @@ public class SoundDataImportingService {
 			final Collection<String> lastFmTopArtistsJson = mapToLastFmArtistsJson(topArtistsJson);
 			saveToFile(SoundDataPaths.TOP_GENRE_ARTISTS_PATH, lastFmTopArtistsJson.stream().collect(joining(System.lineSeparator())));
 
-			final Collection<LastFmArtist> lastFmTopArtists = mapToLastFmArtists(topArtistsJson);
+			final Collection<LastFmArtist> lastFmTopArtists = mapToLastFmArtists(lastFmTopArtistsJson);
 
 			final Collection<String> presentableTopArtistsJson = mapToPresentableArtistsJson(lastFmTopArtists);
 			saveToFile(SoundDataPaths.PRESENTABLE_TOP_GENRE_ARTISTS_PATH, presentableTopArtistsJson.stream().collect(joining(System.lineSeparator())));
@@ -62,13 +65,18 @@ public class SoundDataImportingService {
 	private Collection<String> mapToPresentableArtistsJson(Collection<LastFmArtist> lastFmTopArtists) {
 		return lastFmTopArtists.stream()
 				.map(LastFmArtist::getArtistName)
+				.map(String::toLowerCase)
 				.map(DeezerArtistJsonProvider::getResponse)
-				.collect(toSet());
+				.collect(Collectors.toCollection(ArrayList::new));
 	}
 
 	private Collection<String> mapToLastFmArtistsJson(Collection<String> topArtistsJson) {
 		return topArtistsJson.stream()
+				.map(json -> json.split("rank"))
+				.map(Arrays::asList)
+				.flatMap(Collection::stream)
 				.map(json -> substringBetween(json, "\"mbid\":\"", "\""))
+				.filter(mbid -> mbid != null && !mbid.isEmpty())
 				.map(LastFmArtistJsonProvider::getResponse)
 				.collect(toSet());
 	}
@@ -77,26 +85,26 @@ public class SoundDataImportingService {
 		return lastFmArtists.stream()
 				.map(LastFmArtist::getSimilar)
 				.flatMap(Collection::stream)
+				.filter(elem -> !elem.isEmpty())
 				.collect(toSet());
 	}
 
 	private Collection<LastFmArtist> mapToLastFmArtists(Collection<String> topArtistsJson) {
-		final LastFmTopArtistsJsonMapper mapper = new LastFmTopArtistsJsonMapper();
+		final LastFmArtistJsonMapper mapper = new LastFmArtistJsonMapper();
 		return topArtistsJson.stream()
-				.map(mapper::collectionFromJson)
-				.flatMap(Collection::stream)
+				.map(mapper::fromJson)
+				.filter(elem -> !elem.isEmpty())
 				.collect(toSet());
 	}
 
 	private Collection<AbstractGenre> mapToGenres(String jsonGenres) {
 		return new LastFmTopGenreJsonMapper().collectionFromJson(jsonGenres).stream()
-				.limit(TOP_GENRES_LIMIT)
 				.map(lastFmGenre -> GenreFactory.createGenre(lastFmGenre.getName()))
 				.collect(toSet());
 	}
 
 	private String getTopGenresJson() throws IOException {
-		return LastFmTopGenreJsonProvider.getResponse();
+		return LastFmTopGenreJsonProvider.getResponse(TOP_GENRES_LIMIT);
 	}
 
 	private Collection<String> getGenreTopArtistsJson(Collection<AbstractGenre> genres) {
