@@ -1,6 +1,6 @@
 package com.kerrrusha.playlistassistant.model;
 
-public class AbstractArtist {
+public class AbstractArtist implements Emptyable {
 
 	protected String artistName;
 
@@ -12,8 +12,9 @@ public class AbstractArtist {
 		this.artistName = artistName;
 	}
 
+	@Override
 	public boolean isEmpty() {
-		return artistName.isEmpty();
+		return artistName == null || artistName.isEmpty();
 	}
 
 	@Override

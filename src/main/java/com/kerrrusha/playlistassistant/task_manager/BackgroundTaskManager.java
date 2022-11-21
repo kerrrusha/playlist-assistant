@@ -1,6 +1,6 @@
 package com.kerrrusha.playlistassistant.task_manager;
 
-import com.kerrrusha.playlistassistant.task_manager.task.DataCachingTask;
+import com.kerrrusha.playlistassistant.task_manager.task.SoundDataImportingTask;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -15,7 +15,7 @@ public class BackgroundTaskManager implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
 		scheduler = Executors.newSingleThreadScheduledExecutor();
-		scheduler.scheduleAtFixedRate(new DataCachingTask(), 0, 1, TimeUnit.DAYS);
+		//scheduler.scheduleAtFixedRate(new SoundDataImportingTask(), 0, 1, TimeUnit.DAYS);
 	}
 
 	@Override

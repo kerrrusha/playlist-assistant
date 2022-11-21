@@ -47,14 +47,15 @@ button {
   cursor: pointer;
   color: black;
   text-decoration: none; /* no underline */
+  align-items: center;
 }
 .entity:hover {
   background-color: rgba(255,255,255,0.4);
   color: black;
 }
 .entity img {
-  width: 15vw;
-  height: 15vw;
+  width: 10vw;
+  height: 10vw;
 }
 .entity-selected {
   background-color: rgba(255,255,255,0.6);

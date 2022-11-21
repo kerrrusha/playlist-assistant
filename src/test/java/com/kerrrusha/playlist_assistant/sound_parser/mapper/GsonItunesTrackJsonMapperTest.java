@@ -1,4 +1,4 @@
-package com.kerrrusha.playlist_assistant;
+package com.kerrrusha.playlist_assistant.sound_parser.mapper;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -14,7 +14,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;

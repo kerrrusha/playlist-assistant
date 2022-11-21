@@ -1,4 +1,4 @@
-package com.kerrrusha.playlistassistant.sound_parser.provider.lastfm;
+package com.kerrrusha.playlistassistant.sound_parser.provider.json.lastfm;
 
 import java.io.IOException;
 
@@ -10,6 +10,10 @@ public class LastFmTopGenreJsonProvider {
 	static final String BASE_URL = String.format("https://ws.audioscrobbler.com/2.0/?method=tag.getTopTags&api_key=%s&format=json", API_KEY);
 
 	public static String getResponse() throws IOException {
-		return getResponseString(BASE_URL);
+		return getResponse(50);
+	}
+
+	public static String getResponse(int limit) throws IOException {
+		return getResponseString(BASE_URL + "&num_res=" + limit);
 	}
 }

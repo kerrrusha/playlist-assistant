@@ -12,8 +12,9 @@ public class AbstractTrack extends AbstractArtist {
 		this.trackName = trackName;
 	}
 
+	@Override
 	public boolean isEmpty() {
-		return trackName.isEmpty();
+		return trackName == null || trackName.isEmpty();
 	}
 
 	@Override

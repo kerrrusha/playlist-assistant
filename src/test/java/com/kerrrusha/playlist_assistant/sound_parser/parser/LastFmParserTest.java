@@ -1,10 +1,12 @@
 package com.kerrrusha.playlist_assistant.sound_parser.parser;
 
+import com.kerrrusha.playlistassistant.factory.artist.LastFmArtistFactory;
 import com.kerrrusha.playlistassistant.factory.genre.LastFmGenreFactory;
 import com.kerrrusha.playlistassistant.model.lastfm.LastFmArtist;
 import com.kerrrusha.playlistassistant.model.lastfm.LastFmGenre;
 import com.kerrrusha.playlistassistant.model.lastfm.LastFmTrack;
 import com.kerrrusha.playlistassistant.sound_parser.parser.lastfm.LastFmGenreTopArtistsParser;
+import com.kerrrusha.playlistassistant.sound_parser.parser.lastfm.LastFmSimilarArtistsParser;
 import com.kerrrusha.playlistassistant.sound_parser.parser.lastfm.LastFmTopGenreParser;
 import com.kerrrusha.playlistassistant.sound_parser.parser.lastfm.LastFmTrackParser;
 import org.junit.Test;
@@ -41,5 +43,14 @@ public class LastFmParserTest {
 				.findFirst().orElse(null);
 		System.out.println(track);
 		assertNotNull(track);
+	}
+
+	@Test
+	public void getLastFmSimilarArtistsTest() throws IOException {
+		LastFmArtist artist = new LastFmSimilarArtistsParser().getSimilarArtists(LastFmArtistFactory.createArtist("metallica"), 1)
+				.stream()
+				.findFirst().orElse(null);
+		System.out.println(artist);
+		assertNotNull(artist);
 	}
 }

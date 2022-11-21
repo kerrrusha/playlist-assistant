@@ -1,4 +1,4 @@
-package com.kerrrusha.playlistassistant.sound_parser.provider.lastfm;
+package com.kerrrusha.playlistassistant.sound_parser.provider.json.lastfm;
 
 import org.apache.log4j.Logger;
 

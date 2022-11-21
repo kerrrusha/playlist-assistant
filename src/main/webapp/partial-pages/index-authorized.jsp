@@ -1,7 +1,7 @@
 <main>
   <div class="mt-3">
     <p class="display-6 mb-0">That's the music, what we found for you</p>
-    <p class="d-flex flex-row justify-content-center align-items-center">Based on your <button class="btn text-decoration-underline px-2 mx-0"><strong>choice</strong></button></p>
+    <p class="d-flex flex-row justify-content-center align-items-center">Based on your <a href="${pageContext.request.contextPath}/set-favourite-artists" class="btn text-decoration-underline px-2 mx-0"><strong>choice</strong></a></p>
     <div class="d-flex flex-row my-4 flex-wrap justify-content-center">
       <a class="entity" href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dc65yR7FWJsM&psig=AOvVaw3ri5Bq8G2bbj_updklEmcr&ust=1667678887308000&source=images&cd=vfe&ved=2ahUKEwivldiOqpX7AhUan3IEHV4_C1kQr4kDegUIARDRAQ" target="_blank">
         <div>

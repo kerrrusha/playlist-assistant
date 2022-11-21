@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.kerrrusha.playlistassistant.model.lastfm.LastFmTrack;
 import com.kerrrusha.playlistassistant.sound_parser.mapper.GsonMapper;
-import com.kerrrusha.playlistassistant.sound_parser.provider.lastfm.LastFmTrackJsonProvider;
+import com.kerrrusha.playlistassistant.sound_parser.provider.json.lastfm.LastFmTrackJsonProvider;
 
 import java.util.Collection;
 

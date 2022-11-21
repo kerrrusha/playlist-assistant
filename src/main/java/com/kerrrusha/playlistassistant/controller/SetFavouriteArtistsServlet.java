@@ -1,6 +1,8 @@
 package com.kerrrusha.playlistassistant.controller;
 
-import javax.servlet.RequestDispatcher;
+import com.kerrrusha.playlistassistant.sound_parser.data.SoundDataProvider;
+import com.kerrrusha.playlistassistant.viewmodel.SetFavouriteArtistsViewModel;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +12,11 @@ import java.io.IOException;
 public class SetFavouriteArtistsServlet  extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		RequestDispatcher rd = request.getRequestDispatcher("set-favourite-artists.jsp");
-		rd.forward(request, response);
+		SetFavouriteArtistsViewModel viewModel = new SetFavouriteArtistsViewModel();
+
+		viewModel.setArtists(SoundDataProvider.getInstance().getPresentableTopGenreArtists().shuffle());
+
+		request.setAttribute("model", viewModel);
+		request.getRequestDispatcher("set-favourite-artists.jsp").forward(request, response);
 	}
 }
