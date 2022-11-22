@@ -10,8 +10,6 @@ import org.apache.http.HttpStatus;
 
 import java.util.Collection;
 
-import static com.kerrrusha.playlistassistant.util.DaoUtil.getUserId;
-
 public class RegisterService {
 
 	private static final String DATABASE_ERROR = "An error occurred on the server while creating a new user. We will definitely fix this, but for now, please try again.";
@@ -39,8 +37,9 @@ public class RegisterService {
 			return result;
 		}
 
+		User newUser;
 		try {
-			addUserToDatabase();
+			newUser = addUserToDatabase();
 		} catch (DBException e) {
 			errorPool.add(DATABASE_ERROR);
 			result.setErrorPool(errorPool);
@@ -48,12 +47,12 @@ public class RegisterService {
 			return result;
 		}
 
-		result.setUserId(getUserId(login));
+		result.setUser(newUser);
 		result.setStatus(OK_STATUS);
 		return result;
 	}
 
-	private void addUserToDatabase() throws DBException {
+	private User addUserToDatabase() throws DBException {
 		UserDao dao = new UserDao();
 		User user = new User();
 
@@ -61,5 +60,6 @@ public class RegisterService {
 		user.setPassword(password);
 
 		dao.insert(user);
+		return user;
 	}
 }

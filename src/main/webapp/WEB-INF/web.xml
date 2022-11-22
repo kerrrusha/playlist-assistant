@@ -21,13 +21,18 @@
         <servlet-class>com.kerrrusha.playlistassistant.controller.auth.SignoutServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>SelectFavouriteArtistsServlet</servlet-name>
+        <servlet-class>com.kerrrusha.playlistassistant.controller.SelectFavouriteArtistsServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>SetFavouriteArtistsServlet</servlet-name>
-        <servlet-class>com.kerrrusha.playlistassistant.controller.SetFavouriteArtistsServlet</servlet-class>
+        <servlet-class>com.kerrrusha.playlistassistant.controller.user.SetFavouriteArtistsServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>IndexServlet</servlet-name>
         <url-pattern>/index</url-pattern>
+        <url-pattern></url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -42,8 +47,12 @@
         <url-pattern>/auth/signout</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>SelectFavouriteArtistsServlet</servlet-name>
+        <url-pattern>/select-favourite-artists</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>SetFavouriteArtistsServlet</servlet-name>
-        <url-pattern>/set-favourite-artists</url-pattern>
+        <url-pattern>/user/set-favourite-artists</url-pattern>
     </servlet-mapping>
 
     <filter>
@@ -56,12 +65,16 @@
 
     <filter-mapping>
         <filter-name>IsAuthorizedFilter</filter-name>
-        <url-pattern>/set-favourite-artists</url-pattern>
+        <url-pattern>/user/set-favourite-artists</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>IsAuthorizedFilter</filter-name>
+        <url-pattern>/select-favourite-artists</url-pattern>
     </filter-mapping>
 
     <listener>
         <listener-class>
-            com.kerrrusha.playlistassistant.task_manager.BackgroundTaskManager
+            com.kerrrusha.playlistassistant.task_manager.StartupTaskManager
         </listener-class>
     </listener>
 

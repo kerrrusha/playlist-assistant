@@ -1,16 +1,14 @@
 package com.kerrrusha.playlistassistant.service.auth.result;
 
+import com.kerrrusha.playlistassistant.model.User;
+
 import java.util.Collection;
 
 public class AuthResult {
 
 	private Collection<String> errorPool;
 	private int status;
-	private int userId;
-
-	public AuthResult() {
-		userId = -1;
-	}
+	private User user;
 
 	public Collection<String> getErrorPool() {
 		return errorPool;
@@ -28,12 +26,12 @@ public class AuthResult {
 		this.status = status;
 	}
 
-	public int getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public boolean isOK() {

@@ -19,10 +19,13 @@
 
     <main>
       <div class="mt-3">
-        <p class="display-6">Select 0/10 items</p>
+        <p class="display-6">Select <span id="current-selected">0</span>/<span id="max-artists">10</span> items</p>
         <p>Based on them, new tracks will be offered to your playlist</p>
-        <button class="btn bg-light" href="#">
-          <span class="fs-5">Show new artists</span>
+        <button id="get-playlist-button" class="btn btn-light disabled" onclick="getPlaylist(
+                '${pageContext.request.contextPath}/user/set-favourite-artists',
+                '${pageContext.request.contextPath}/'
+                )">
+          <span class="fs-5">Get similar tracks playlist</span>
         </button>
         <div class="d-flex flex-row my-4 flex-wrap justify-content-center">
           <c:forEach var="var" items="${model.getArtists()}">
@@ -44,7 +47,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
-    <!-- auth logic -->
-    <script src="${pageContext.request.contextPath}/js/auth.js"></script>
+    <!-- set artists logic -->
+    <script src="${pageContext.request.contextPath}/js/set-favourite-artists.js"></script>
   </body>
 </html>

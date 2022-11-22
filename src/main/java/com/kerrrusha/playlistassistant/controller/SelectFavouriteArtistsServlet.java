@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class SetFavouriteArtistsServlet  extends HttpServlet {
+public class SelectFavouriteArtistsServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		SetFavouriteArtistsViewModel viewModel = new SetFavouriteArtistsViewModel();
@@ -17,6 +17,6 @@ public class SetFavouriteArtistsServlet  extends HttpServlet {
 		viewModel.setArtists(SoundDataProvider.getInstance().getPresentableTopGenreArtists().shuffle());
 
 		request.setAttribute("model", viewModel);
-		request.getRequestDispatcher("set-favourite-artists.jsp").forward(request, response);
+		request.getRequestDispatcher("select-favourite-artists.jsp").forward(request, response);
 	}
 }

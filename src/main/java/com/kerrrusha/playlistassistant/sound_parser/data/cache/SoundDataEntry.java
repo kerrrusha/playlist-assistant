@@ -8,9 +8,7 @@ import static java.util.stream.Collectors.toCollection;
 
 public class SoundDataEntry <T extends Emptyable> extends ArrayList<T> {
 
-	public SoundDataEntry() {
-
-	}
+	public SoundDataEntry() {}
 
 	public SoundDataEntry(Collection<T> elements) {
 		super(elements);
