@@ -29,7 +29,7 @@
         <input type="text" placeholder="Nickname">
         <input type="password" placeholder="Password">
         <input type="password" placeholder="Confirm Password">
-        <input onclick="processRegister('${pageContext.request.contextPath}/auth/register', '${pageContext.request.contextPath}/set-favourite-artists')" id="register" type="button" value="Register">
+        <input onclick="processRegister('${pageContext.request.contextPath}/auth/register', '${pageContext.request.contextPath}/select-favourite-artists')" id="register" type="button" value="Register">
       </div>
       <div class="errors-block" style="visibility: hidden;">
 

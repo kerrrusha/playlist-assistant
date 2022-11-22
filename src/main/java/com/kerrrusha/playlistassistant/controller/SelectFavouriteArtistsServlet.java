@@ -17,6 +17,6 @@ public class SelectFavouriteArtistsServlet extends HttpServlet {
 		viewModel.setArtists(SoundDataProvider.getInstance().getPresentableTopGenreArtists().shuffle());
 
 		request.setAttribute("model", viewModel);
-		request.getRequestDispatcher("set-favourite-artists.jsp").forward(request, response);
+		request.getRequestDispatcher("select-favourite-artists.jsp").forward(request, response);
 	}
 }

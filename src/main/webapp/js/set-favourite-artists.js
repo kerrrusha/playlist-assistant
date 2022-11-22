@@ -95,8 +95,17 @@ function getSelectedArtistsJson() {
     let selectedArtistsNamesArray = [];
 
     for (let artist of selectedArtists) {
-        selectedArtistsNamesArray.push(artist.getElementsByTagName( "span")[0].innerText);
+        let artistName = artist.getElementsByTagName("span")[0].innerText;
+        let artistPhotoUrl = artist.getElementsByTagName("img")[0].src;
+        selectedArtistsNamesArray.push(createArtistJson(artistName, artistPhotoUrl));
     }
 
     return JSON.stringify(selectedArtistsNamesArray);
+}
+
+function createArtistJson(artistName, artistPhotoUrl) {
+    let json = {};
+    json["name"] = artistName;
+    json["photoUrl"] = artistPhotoUrl;
+    return JSON.stringify(json);
 }

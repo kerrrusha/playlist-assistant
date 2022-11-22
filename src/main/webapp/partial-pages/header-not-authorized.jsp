@@ -7,7 +7,7 @@
         <div class="navbar-collapse justify-content-md-center align-items-md-center collapse" id="navbarsExample09" style="">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active h1">
-                    <a class="nav-link" href="#">Playlist Assistant</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/">Playlist Assistant</a>
                 </li>
             </ul>
         </div>

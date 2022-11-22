@@ -32,6 +32,7 @@
     <servlet-mapping>
         <servlet-name>IndexServlet</servlet-name>
         <url-pattern>/index</url-pattern>
+        <url-pattern></url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -64,12 +65,16 @@
 
     <filter-mapping>
         <filter-name>IsAuthorizedFilter</filter-name>
-        <url-pattern>/set-favourite-artists</url-pattern>
+        <url-pattern>/user/set-favourite-artists</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>IsAuthorizedFilter</filter-name>
+        <url-pattern>/select-favourite-artists</url-pattern>
     </filter-mapping>
 
     <listener>
         <listener-class>
-            com.kerrrusha.playlistassistant.task_manager.BackgroundTaskManager
+            com.kerrrusha.playlistassistant.task_manager.StartupTaskManager
         </listener-class>
     </listener>
 

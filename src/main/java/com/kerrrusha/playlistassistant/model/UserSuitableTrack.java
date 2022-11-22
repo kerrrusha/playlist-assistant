@@ -1,11 +1,12 @@
 package com.kerrrusha.playlistassistant.model;
 
-public class UserSelectedArtist {
+public class UserSuitableTrack {
 
 	private int id;
 	private int userId;
 	private String artistName;
-	private String artistPhotoUrl;
+	private String trackName;
+	private String trackPhotoUrl;
 
 	public int getId() {
 		return id;
@@ -31,21 +32,30 @@ public class UserSelectedArtist {
 		this.artistName = artistName;
 	}
 
-	public String getArtistPhotoUrl() {
-		return artistPhotoUrl;
+	public String getTrackName() {
+		return trackName;
 	}
 
-	public void setArtistPhotoUrl(String artistPhotoUrl) {
-		this.artistPhotoUrl = artistPhotoUrl;
+	public void setTrackName(String trackName) {
+		this.trackName = trackName;
+	}
+
+	public String getTrackPhotoUrl() {
+		return trackPhotoUrl;
+	}
+
+	public void setTrackPhotoUrl(String trackPhotoUrl) {
+		this.trackPhotoUrl = trackPhotoUrl;
 	}
 
 	@Override
 	public String toString() {
-		return "UserSelectedArtist{" +
+		return "UserSuitableTrack{" +
 				"id=" + id +
 				", userId=" + userId +
 				", artistName='" + artistName + '\'' +
-				", artistPhotoUrl='" + artistPhotoUrl + '\'' +
+				", trackName='" + trackName + '\'' +
+				", trackPhotoUrl='" + trackPhotoUrl + '\'' +
 				'}';
 	}
 }

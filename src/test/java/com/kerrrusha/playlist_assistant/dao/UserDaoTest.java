@@ -16,12 +16,12 @@ public class UserDaoTest {
 	}
 
 	@Test
-	public void inputDeleteTest() {
+	public void insertDeleteTest() {
 		try {
 			final UserDao dao = new UserDao();
 
-			final String login = "testingLogin";
-			final String password = "testingPassword";
+			final String login = "UserDaoTestLogin";
+			final String password = "UserDaoTestPassword";
 			final User user = new User();
 
 			user.setLogin(login);

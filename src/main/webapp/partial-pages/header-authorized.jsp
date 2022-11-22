@@ -13,7 +13,7 @@
           </div>
         </li>
         <li class="nav-item active h1">
-          <a class="nav-link" href="#">Playlist Assistant</a>
+          <a class="nav-link" href="${pageContext.request.contextPath}/">Playlist Assistant</a>
         </li>
         <li class="nav-item active">
           <form action="${pageContext.request.contextPath}/auth/signout" method="POST">

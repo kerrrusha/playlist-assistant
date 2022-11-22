@@ -11,8 +11,8 @@ public class ItunesTrack extends AbstractTrack {
 	private int trackId;
 	private String collectionName;
 	private String artistViewUrl, collectionViewUrl, trackViewUrl, previewUrl, artworkUrl100;
-	private Date releaseDate;
 	private String country, primaryGenreName;
+	private Date releaseDate;
 
 	public ItunesTrack() {}
 
