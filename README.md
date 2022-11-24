@@ -1,6 +1,7 @@
 # Playlist Assistant
 
 Java MVC web-application on servlets, that uses PostgreSQL via JDBC. This app is used to suggest new songs for you, analyzing your musical preferences.
+As of 11/25/2022, the site is hosting in the Google Cloud and available at: https://playlist-assistant-369622.oa.r.appspot.com/
 
 ## Technical notes
 
