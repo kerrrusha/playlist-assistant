@@ -24,6 +24,7 @@ public class SetFavouriteArtistsServlet extends HttpServlet {
 		final User user = (User)request.getSession().getAttribute("user");
 		final Collection<PresentableArtist> selectedArtists = SetFavouriteArtistsUtil.
 				mapJsonToPresentableArtists(request.getParameter("selected-artists"));
+		logger.info("User has selected "+selectedArtists.size()+" artists.");
 
 		try {
 			new SetFavouriteArtistsService(selectedArtists).setToUser(user);

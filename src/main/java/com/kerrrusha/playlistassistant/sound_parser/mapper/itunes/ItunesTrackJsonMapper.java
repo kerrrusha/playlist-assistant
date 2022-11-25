@@ -29,10 +29,10 @@ public class ItunesTrackJsonMapper extends GsonMapper {
 	private static Collection<JsonElement> jsonToElements(String json) {
 		Collection<JsonElement> jsonList = new ArrayList<>();
 		try {
-			jsonList =JsonParser.parseString(json).getAsJsonObject().
+			jsonList = JsonParser.parseString(json).getAsJsonObject().
 					getAsJsonArray("results").asList();
 		} catch (Throwable e) {
-			logger.warn(json + System.lineSeparator() + e);
+			logger.warn("<json>"+json+"</json>" + System.lineSeparator() + e);
 		}
 		return jsonList;
 	}

@@ -4,7 +4,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import javax.sql.DataSource;
 
-public class ConnectorConnectionPoolFactory {
+public class ConnectorConnectionPoolFactory extends ConnectionPoolFactory {
 
     // Note: Saving credentials in environment variables is convenient, but not
     // secure - consider a more secure solution such as

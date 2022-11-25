@@ -23,7 +23,11 @@ public class IndexServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
 		HttpSession session = request.getSession(false);
-		boolean loggedIn = (session != null && session.getAttribute("user") != null);
+		boolean loggedIn = (session != null);
+		if (loggedIn) {
+			Object user = session.getAttribute("user");
+			loggedIn = (user != null);
+		}
 
 		if (loggedIn) {
 			try {

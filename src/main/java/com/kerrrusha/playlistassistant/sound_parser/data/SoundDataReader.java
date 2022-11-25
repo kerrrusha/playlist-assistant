@@ -31,6 +31,10 @@ public class SoundDataReader {
 	private static final DeezerArtistJsonMapper deezerArtistJsonMapper = new DeezerArtistJsonMapper();
 	private static final ItunesTrackJsonMapper similarArtistsTopTracksMapper = new ItunesTrackJsonMapper();
 
+	private static final String TRACKS_SPLITTER = "(?=\n" +
+			"\\{\n" +
+			" \")";
+
 	public boolean dataFilesIsOk() {
 		return Files.exists(Paths.get(TOP_GENRES_PATH))
 				&& Files.exists(Paths.get(TOP_GENRE_ARTISTS_PATH))
@@ -81,8 +85,8 @@ public class SoundDataReader {
 	public Collection<ItunesTrack> readSimilarArtistsTopTracks() {
 		try {
 			final Collection<String> similarArtistsTopTracksJson = Arrays.stream(new String(Files.readAllBytes(Paths.get(SIMILAR_ARTISTS_TOP_TRACKS_PATH)),
-							StandardCharsets.UTF_8).split(System.lineSeparator()))
-					.filter(str -> !str.isEmpty())
+							StandardCharsets.UTF_8).split(TRACKS_SPLITTER))
+					.filter(str -> !str.trim().isEmpty())
 					.collect(toSet());
 			return similarArtistsTopTracksJson.stream()
 					.map(similarArtistsTopTracksMapper::collectionFromJson)
