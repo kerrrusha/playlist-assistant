@@ -16,7 +16,7 @@ public class UserDao extends AbstractDao {
 
 	public Collection<User> findAll() throws DBException {
 		Collection<User> entities = new ArrayList<>();
-		try (Connection con = DriverManager.getConnection(FULL_URL);
+		try (Connection con = dataSource.getConnection();
 		     Statement stmt = con.createStatement();
 		     ResultSet rs = stmt.executeQuery(Queries.SELECT_ALL_USERS)) {
 			while(rs.next()) {
@@ -31,7 +31,7 @@ public class UserDao extends AbstractDao {
 
 	public User findOneById(int id) throws DBException {
 		User entity = null;
-		try (Connection con = DriverManager.getConnection(FULL_URL);
+		try (Connection con = dataSource.getConnection();
 		     PreparedStatement stmt = con.prepareStatement(Queries.FIND_USER_BY_ID)) {
 			stmt.setInt(1, id);
 			try (ResultSet rs = stmt.executeQuery()) {
@@ -48,7 +48,7 @@ public class UserDao extends AbstractDao {
 
 	public User findOneByLogin(String login) throws DBException {
 		User entity = null;
-		try (Connection con = DriverManager.getConnection(FULL_URL);
+		try (Connection con = dataSource.getConnection();
 		     PreparedStatement stmt = con.prepareStatement(Queries.FIND_USER_BY_LOGIN)) {
 			stmt.setString(1, login);
 			try (ResultSet rs = stmt.executeQuery()) {
@@ -64,7 +64,7 @@ public class UserDao extends AbstractDao {
 	}
 
 	public void insert(User entity) throws DBException {
-		try (Connection con = DriverManager.getConnection(FULL_URL);
+		try (Connection con = dataSource.getConnection();
 		     PreparedStatement stmt = con.prepareStatement(Queries.INSERT_USER)) {
 			stmt.setString(1, entity.getLogin());
 			stmt.setString(2, entity.getPassword());
@@ -76,7 +76,7 @@ public class UserDao extends AbstractDao {
 	}
 
 	public void deleteById(User entity) throws DBException {
-		try (Connection con = DriverManager.getConnection(FULL_URL);
+		try (Connection con = dataSource.getConnection();
 		     PreparedStatement stmt = con.prepareStatement(Queries.DELETE_USER_BY_ID)) {
 			stmt.setInt(1, entity.getId());
 			stmt.executeUpdate();
@@ -87,7 +87,7 @@ public class UserDao extends AbstractDao {
 	}
 
 	public void deleteByLogin(User entity) throws DBException {
-		try (Connection con = DriverManager.getConnection(FULL_URL);
+		try (Connection con = dataSource.getConnection();
 		     PreparedStatement stmt = con.prepareStatement(Queries.DELETE_USER_BY_LOGIN)) {
 			stmt.setString(1, entity.getLogin());
 			stmt.executeUpdate();

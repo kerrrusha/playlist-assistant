@@ -2,9 +2,12 @@ package com.kerrrusha.playlistassistant.model.itunes;
 
 import com.kerrrusha.playlistassistant.model.AbstractTrack;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ItunesTrack extends AbstractTrack {
+public class ItunesTrack extends AbstractTrack implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private int artistId;
 	private int collectionId;

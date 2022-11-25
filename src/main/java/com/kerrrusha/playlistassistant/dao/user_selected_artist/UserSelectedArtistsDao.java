@@ -16,7 +16,7 @@ public class UserSelectedArtistsDao extends AbstractDao {
 
 	public Collection<UserSelectedArtist> findAll() throws DBException {
 		Collection<UserSelectedArtist> entities = new ArrayList<>();
-		try (Connection con = DriverManager.getConnection(FULL_URL);
+		try (Connection con = dataSource.getConnection();
 		     Statement stmt = con.createStatement();
 		     ResultSet rs = stmt.executeQuery(Queries.SELECT_ALL_USER_SELECTED_ARTISTS)) {
 			while(rs.next()) {
@@ -31,7 +31,7 @@ public class UserSelectedArtistsDao extends AbstractDao {
 
 	public Collection<UserSelectedArtist> findAllByUserId(int userId) throws DBException {
 		Collection<UserSelectedArtist> entities = new ArrayList<>();
-		try (Connection con = DriverManager.getConnection(FULL_URL);
+		try (Connection con = dataSource.getConnection();
 		     PreparedStatement stmt = con.prepareStatement(Queries.FIND_USER_SELECTED_ARTIST_BY_USER_ID)) {
 			stmt.setInt(1, userId);
 			try (ResultSet rs = stmt.executeQuery()) {
@@ -47,7 +47,7 @@ public class UserSelectedArtistsDao extends AbstractDao {
 	}
 
 	public void insert(UserSelectedArtist entity) throws DBException {
-		try (Connection con = DriverManager.getConnection(FULL_URL);
+		try (Connection con = dataSource.getConnection();
 		     PreparedStatement stmt = con.prepareStatement(Queries.INSERT_USER_SELECTED_ARTIST)) {
 			stmt.setInt(1, entity.getUserId());
 			stmt.setString(2, entity.getArtistName());
@@ -60,7 +60,7 @@ public class UserSelectedArtistsDao extends AbstractDao {
 	}
 
 	public void deleteById(UserSelectedArtist entity) throws DBException {
-		try (Connection con = DriverManager.getConnection(FULL_URL);
+		try (Connection con = dataSource.getConnection();
 		     PreparedStatement stmt = con.prepareStatement(Queries.DELETE_USER_SELECTED_ARTIST_BY_ID)) {
 			stmt.setInt(1, entity.getId());
 			stmt.executeUpdate();
@@ -71,7 +71,7 @@ public class UserSelectedArtistsDao extends AbstractDao {
 	}
 
 	public void deleteByUserId(int userId) throws DBException {
-		try (Connection con = DriverManager.getConnection(FULL_URL);
+		try (Connection con = dataSource.getConnection();
 		     PreparedStatement stmt = con.prepareStatement(Queries.DELETE_USER_SELECTED_ARTIST_BY_USER_ID)) {
 			stmt.setInt(1, userId);
 			stmt.executeUpdate();

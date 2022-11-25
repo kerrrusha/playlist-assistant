@@ -32,7 +32,7 @@ public class AuthResultSender extends AuthResult {
 		} catch (DBException e) {
 			setErrorPool(Collections.singleton(e.getMessage()));
 			setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
-		}
+		} catch (NullPointerException ignored) {}
 
 		setJsonToResponse(response, gson.toJson(this));
 		response.getWriter().flush();

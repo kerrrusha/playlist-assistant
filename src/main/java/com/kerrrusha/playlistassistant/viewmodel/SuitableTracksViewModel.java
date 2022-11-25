@@ -2,9 +2,12 @@ package com.kerrrusha.playlistassistant.viewmodel;
 
 import com.kerrrusha.playlistassistant.model.itunes.ItunesTrack;
 
+import java.io.Serializable;
 import java.util.Collection;
 
-public class SuitableTracksViewModel {
+public class SuitableTracksViewModel implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private Collection<ItunesTrack> tracks;
 

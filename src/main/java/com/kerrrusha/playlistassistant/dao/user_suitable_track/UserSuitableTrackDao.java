@@ -15,7 +15,7 @@ public class UserSuitableTrackDao extends AbstractDao {
 
 	public Collection<UserSuitableTrack> findAll() throws DBException {
 		Collection<UserSuitableTrack> entities = new ArrayList<>();
-		try (Connection con = DriverManager.getConnection(FULL_URL);
+		try (Connection con = dataSource.getConnection();
 		     Statement stmt = con.createStatement();
 		     ResultSet rs = stmt.executeQuery(Queries.SELECT_ALL_USER_SUITABLE_TRACKS)) {
 			while(rs.next()) {
@@ -30,7 +30,7 @@ public class UserSuitableTrackDao extends AbstractDao {
 
 	public Collection<UserSuitableTrack> findAllByUserId(int userId) throws DBException {
 		Collection<UserSuitableTrack> entities = new ArrayList<>();
-		try (Connection con = DriverManager.getConnection(FULL_URL);
+		try (Connection con = dataSource.getConnection();
 		     PreparedStatement stmt = con.prepareStatement(Queries.FIND_USER_SUITABLE_TRACK_BY_USER_ID)) {
 			stmt.setInt(1, userId);
 			try (ResultSet rs = stmt.executeQuery()) {
@@ -46,7 +46,7 @@ public class UserSuitableTrackDao extends AbstractDao {
 	}
 
 	public void insert(UserSuitableTrack entity) throws DBException {
-		try (Connection con = DriverManager.getConnection(FULL_URL);
+		try (Connection con = dataSource.getConnection();
 		     PreparedStatement stmt = con.prepareStatement(Queries.INSERT_USER_SUITABLE_TRACK)) {
 			stmt.setInt(1, entity.getUserId());
 			stmt.setString(2, entity.getArtistName());
@@ -60,7 +60,7 @@ public class UserSuitableTrackDao extends AbstractDao {
 	}
 
 	public void deleteById(UserSuitableTrack entity) throws DBException {
-		try (Connection con = DriverManager.getConnection(FULL_URL);
+		try (Connection con = dataSource.getConnection();
 		     PreparedStatement stmt = con.prepareStatement(Queries.DELETE_USER_SUITABLE_TRACK_BY_ID)) {
 			stmt.setInt(1, entity.getId());
 			stmt.executeUpdate();
@@ -71,7 +71,7 @@ public class UserSuitableTrackDao extends AbstractDao {
 	}
 
 	public void deleteByUserId(int userId) throws DBException {
-		try (Connection con = DriverManager.getConnection(FULL_URL);
+		try (Connection con = dataSource.getConnection();
 		     PreparedStatement stmt = con.prepareStatement(Queries.DELETE_USER_SUITABLE_TRACK_BY_USER_ID)) {
 			stmt.setInt(1, userId);
 			stmt.executeUpdate();

@@ -1,6 +1,10 @@
 package com.kerrrusha.playlistassistant.model;
 
-public class UserSuitableTrack {
+import java.io.Serializable;
+
+public class UserSuitableTrack implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private int id;
 	private int userId;

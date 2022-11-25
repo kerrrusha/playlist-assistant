@@ -65,15 +65,14 @@ function updateSelectedArtistsCounter() {
 }
 
 function getPlaylist(updateArtistsUrl, playlistPageUrl) {
-    updateSelectedArtists(updateArtistsUrl);
-    forwardToPlaylistPage(playlistPageUrl);
+    updateSelectedArtistsThenForward(updateArtistsUrl, playlistPageUrl);
 }
 
 function forwardToPlaylistPage(url) {
     window.location.href = url;
 }
 
-function updateSelectedArtists(url) {
+function updateSelectedArtistsThenForward(url, playlistPageUrl) {
     let artistsJson = getSelectedArtistsJson();
     let data = {"selected-artists":artistsJson};
 
@@ -83,9 +82,11 @@ function updateSelectedArtists(url) {
         data: data,
         success: function(response) {
             console.log(response);
+            forwardToPlaylistPage(playlistPageUrl);
         },
         error: function (response) {
             console.log(response);
+            forwardToPlaylistPage(playlistPageUrl);
         }
     });
 }
